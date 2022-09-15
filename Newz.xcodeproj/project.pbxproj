@@ -11,8 +11,8 @@
 		ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95128D245DE00001A56 /* CoreDateStack.swift */; };
 		ED53C95528D248A200001A56 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95428D248A200001A56 /* Article.swift */; };
 		ED53C95728D249FF00001A56 /* Article+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95628D249FF00001A56 /* Article+CoreData.swift */; };
-		ED53C95F28D25E6E00001A56 /* NewzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95E28D25E6E00001A56 /* NewzTests.swift */; };
 		ED53C96728D25EE600001A56 /* CoreDateStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C96628D25EE600001A56 /* CoreDateStack.swift */; };
+		EDDDB7D928D36429009AFBD5 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */; };
 		EDE989D128D0C18D00D6CDEF /* NewzApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D028D0C18D00D6CDEF /* NewzApp.swift */; };
 		EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D228D0C18D00D6CDEF /* ContentView.swift */; };
 		EDE989D528D0C19100D6CDEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE989D428D0C19100D6CDEF /* Assets.xcassets */; };
@@ -35,8 +35,8 @@
 		ED53C95428D248A200001A56 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		ED53C95628D249FF00001A56 /* Article+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreData.swift"; sourceTree = "<group>"; };
 		ED53C95C28D25E6E00001A56 /* NewzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED53C95E28D25E6E00001A56 /* NewzTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewzTests.swift; sourceTree = "<group>"; };
 		ED53C96628D25EE600001A56 /* CoreDateStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateStack.swift; sourceTree = "<group>"; };
+		EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		EDE989CD28D0C18D00D6CDEF /* Newz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE989D028D0C18D00D6CDEF /* NewzApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewzApp.swift; sourceTree = "<group>"; };
 		EDE989D228D0C18D00D6CDEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				ED53C96528D25E7800001A56 /* Persistence */,
-				ED53C95E28D25E6E00001A56 /* NewzTests.swift */,
+				EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */,
 			);
 			path = NewzTests;
 			sourceTree = "<group>";
@@ -95,6 +95,13 @@
 				ED53C96628D25EE600001A56 /* CoreDateStack.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		EDDDB7DA28D36812009AFBD5 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		EDE989C428D0C18D00D6CDEF = {
@@ -119,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				ED53C94D28D2447000001A56 /* Persistence */,
+				EDDDB7DA28D36812009AFBD5 /* Repositories */,
 				ED53C95328D2488A00001A56 /* Models */,
 				EDE989DE28D0C23400D6CDEF /* System */,
 				EDE989D228D0C18D00D6CDEF /* ContentView.swift */,
@@ -258,7 +266,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -267,8 +275,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED53C95F28D25E6E00001A56 /* NewzTests.swift in Sources */,
 				ED53C96728D25EE600001A56 /* CoreDateStack.swift in Sources */,
+				EDDDB7D928D36429009AFBD5 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

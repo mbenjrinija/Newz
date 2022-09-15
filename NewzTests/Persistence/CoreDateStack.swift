@@ -12,70 +12,43 @@ import CoreData
 
 final class TestCoreDataStack: XCTestCase {
 
-    var dataStack: CoreDataTestStack!
-    var subs = Set<AnyCancellable>()
-    override func setUpWithError() throws {
-        dataStack = CoreDataTestStack()
-    }
+  var dataStack: CoreDataTestStack!
+  var subs = Set<AnyCancellable>()
 
-    override func tearDownWithError() throws {
-        dataStack = nil
-    }
+  override func setUpWithError() throws {
+    dataStack = CoreDataTestStack()
+  }
 
-    func test_InitStack_StoreLoaded() async throws {
-        // Given
-        let expected = true
-        var result: Result<Bool, Error>?
-        let expectation = expectation(description: #function)
+  override func tearDownWithError() throws {
+    dataStack = nil
+  }
 
-        // When
-        dataStack.isStoreLoaded
-            .sinkToResult { value in
-                result = value
-            }.store(in: &subs)
+  func test_InitStack_StoreLoaded() throws {
+    // Given
+    let expected = true
+    var result: Result<Bool, Error>?
+    let expectation = expectation(description: #function)
 
-        wait(for: [expectation], timeout: 1)
+    // When
+    dataStack.isStoreLoaded
+      .first(where: { $0 })
+      .sinkToResult { value in
+        result = value
+        expectation.fulfill()
+      }.store(in: &subs)
 
-        // Then
-        result!.assertSuccess(to: expected)
-    }
+    wait(for: [expectation], timeout: 0.1)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    // Then
+    result!.assertSuccess(to: expected)
+  }
+  
 }
 
 class CoreDataTestStack: CoreDataStack {
-    override func configureContainer() {
-        let storeDescription = NSPersistentStoreDescription()
-        storeDescription.type = NSInMemoryStoreType
-        container.persistentStoreDescriptions = [storeDescription]
-    }
-}
-
-extension Publisher {
-    func sinkToResult(_ result: @escaping (Result<Self.Output, Self.Failure>) -> Void ) -> AnyCancellable {
-        self.sink { completion in
-            if case .failure(let error) = completion {
-                result(.failure(error))
-            }
-        } receiveValue: { value in
-            result(.success(value))
-        }
-    }
-}
-
-extension Result where Success: Equatable {
-    func assertSuccess(to expectedValue: Success, file: StaticString = #file, line: UInt = #line) {
-        switch self {
-        case .success(let result):
-            XCTAssertEqual(result, expectedValue, file: file, line: line)
-        case .failure(let error):
-            XCTFail(error.localizedDescription)
-        }
-    }
+  override func configureContainer() {
+    let storeDescription = NSPersistentStoreDescription()
+    storeDescription.type = NSInMemoryStoreType
+    container.persistentStoreDescriptions = [storeDescription]
+  }
 }
