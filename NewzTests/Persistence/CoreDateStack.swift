@@ -42,7 +42,7 @@ final class TestCoreDataStack: XCTestCase {
     // Then
     result!.assertSuccess(to: expected)
   }
-  
+
 }
 
 class CoreDataTestStack: CoreDataStack {
