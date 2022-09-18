@@ -8,19 +8,47 @@
 import Foundation
 import Combine
 
-protocol ArticlesApiRepository {
-  func save(articles: [Article]) -> AnyPublisher<Bool, Error>
+protocol ArticlesApiRepository: ApiRepository {
   func fetchArticles() -> AnyPublisher<[Article], Error>
 }
 
 struct ArticlesApiRepoImpl: ArticlesApiRepository {
 
-  func save(articles: [Article]) -> AnyPublisher<Bool, Error> {
-    Empty().eraseToAnyPublisher()
+  let session: URLSession
+
+  init(session: URLSession) {
+    self.session = session
   }
 
   func fetchArticles() -> AnyPublisher<[Article], Error> {
-    Empty().eraseToAnyPublisher()
+    call(endpoint: API.getArticles)
   }
 
+}
+
+extension ArticlesApiRepoImpl {
+  enum API {
+    case getArticles
+  }
+}
+
+extension ArticlesApiRepoImpl.API: APICall {
+  var path: String {
+    switch self {
+    case .getArticles:
+      return "/new"
+    }
+  }
+  var method: String {
+    switch self {
+    case .getArticles:
+      return "GET"
+    }
+  }
+  var headers: [String: String]? {
+    return ["Accept": "application/json"]
+  }
+  func body() throws -> Data? {
+    nil
+  }
 }

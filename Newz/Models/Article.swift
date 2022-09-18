@@ -13,8 +13,8 @@ struct ArrayResult<T: Codable>: Codable {
   let data: [T]?
 }
 
-// MARK: - Datum
-struct Article: Codable {
+// MARK: - Article
+struct Article: Codable, Equatable {
   let author, title, desc: String?
   let url: String?
   let source: String?
@@ -33,4 +33,11 @@ struct Article: Codable {
 // MARK: - Pagination
 struct Pagination: Codable {
   let limit, offset, count, total: Int?
+}
+
+extension Article: Comparable {
+  static func < (lhs: Article, rhs: Article) -> Bool {
+    return lhs.url! < rhs.url!
+  }
+
 }

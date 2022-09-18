@@ -12,10 +12,14 @@
 		ED53C95528D248A200001A56 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95428D248A200001A56 /* Article.swift */; };
 		ED53C95728D249FF00001A56 /* Article+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95628D249FF00001A56 /* Article+CoreData.swift */; };
 		ED53C96728D25EE600001A56 /* CoreDateStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C96628D25EE600001A56 /* CoreDateStack.swift */; };
+		ED5DF17A28D75F2600ACD07C /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5DF17928D75F2600ACD07C /* Mockable.swift */; };
+		ED5DF17D28D7699E00ACD07C /* articles.json in Resources */ = {isa = PBXBuildFile; fileRef = ED5DF17C28D7699E00ACD07C /* articles.json */; };
 		ED5F035728D3928D003FC51F /* ArticlesApiRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035628D3928D003FC51F /* ArticlesApiRepo.swift */; };
 		ED5F035A28D394DA003FC51F /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035928D394DA003FC51F /* Injectable.swift */; };
 		ED5F035C28D47DC6003FC51F /* ArticlesDbRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035B28D47DC6003FC51F /* ArticlesDbRepo.swift */; };
 		ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035D28D4A1F5003FC51F /* Injector.swift */; };
+		ED5F036128D513B3003FC51F /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED5F036028D513B3003FC51F /* config.plist */; };
+		ED5F036428D53722003FC51F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F036328D53722003FC51F /* API.swift */; };
 		EDDDB7D928D36429009AFBD5 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */; };
 		EDE989D128D0C18D00D6CDEF /* NewzApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D028D0C18D00D6CDEF /* NewzApp.swift */; };
 		EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D228D0C18D00D6CDEF /* ContentView.swift */; };
@@ -40,11 +44,14 @@
 		ED53C95628D249FF00001A56 /* Article+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreData.swift"; sourceTree = "<group>"; };
 		ED53C95C28D25E6E00001A56 /* NewzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED53C96628D25EE600001A56 /* CoreDateStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateStack.swift; sourceTree = "<group>"; };
+		ED5DF17928D75F2600ACD07C /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
+		ED5DF17C28D7699E00ACD07C /* articles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = articles.json; sourceTree = "<group>"; };
 		ED5F035628D3928D003FC51F /* ArticlesApiRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesApiRepo.swift; sourceTree = "<group>"; };
 		ED5F035928D394DA003FC51F /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
 		ED5F035B28D47DC6003FC51F /* ArticlesDbRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDbRepo.swift; sourceTree = "<group>"; };
 		ED5F035D28D4A1F5003FC51F /* Injector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
-		ED5F035F28D50084003FC51F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		ED5F036028D513B3003FC51F /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		ED5F036328D53722003FC51F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		EDE989CD28D0C18D00D6CDEF /* Newz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE989D028D0C18D00D6CDEF /* NewzApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewzApp.swift; sourceTree = "<group>"; };
@@ -71,18 +78,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ED53C94D28D2447000001A56 /* Persistence */ = {
+		ED53C94D28D2447000001A56 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				ED53C94E28D2449700001A56 /* NewzModel.xcdatamodeld */,
 				ED53C95128D245DE00001A56 /* CoreDateStack.swift */,
 			);
-			path = Persistence;
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		ED53C95328D2488A00001A56 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ED5DF17B28D7695F00ACD07C /* Mock */,
 				ED53C95428D248A200001A56 /* Article.swift */,
 				ED53C95628D249FF00001A56 /* Article+CoreData.swift */,
 			);
@@ -106,9 +114,19 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		ED5DF17B28D7695F00ACD07C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				ED5DF17C28D7699E00ACD07C /* articles.json */,
+				ED5DF17928D75F2600ACD07C /* Mockable.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		ED5F035428D39217003FC51F /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				ED53C94D28D2447000001A56 /* Configuration */,
 				ED5F035B28D47DC6003FC51F /* ArticlesDbRepo.swift */,
 			);
 			path = DB;
@@ -117,6 +135,7 @@
 		ED5F035528D39220003FC51F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				ED5F036228D536FD003FC51F /* Configuration */,
 				ED5F035628D3928D003FC51F /* ArticlesApiRepo.swift */,
 			);
 			path = API;
@@ -131,6 +150,14 @@
 			path = Injection;
 			sourceTree = "<group>";
 		};
+		ED5F036228D536FD003FC51F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				ED5F036328D53722003FC51F /* API.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		EDDDB7DA28D36812009AFBD5 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +170,7 @@
 		EDE989C428D0C18D00D6CDEF = {
 			isa = PBXGroup;
 			children = (
-				ED5F035F28D50084003FC51F /* Config.xcconfig */,
+				ED5F036028D513B3003FC51F /* config.plist */,
 				EDE989CF28D0C18D00D6CDEF /* Newz */,
 				ED53C95D28D25E6E00001A56 /* NewzTests */,
 				EDE989CE28D0C18D00D6CDEF /* Products */,
@@ -163,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				ED5F035828D394C4003FC51F /* Injection */,
-				ED53C94D28D2447000001A56 /* Persistence */,
 				EDDDB7DA28D36812009AFBD5 /* Repositories */,
 				ED53C95328D2488A00001A56 /* Models */,
 				EDE989DE28D0C23400D6CDEF /* System */,
@@ -279,8 +305,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5DF17D28D7699E00ACD07C /* articles.json in Resources */,
 				EDE989D828D0C19100D6CDEF /* Preview Assets.xcassets in Resources */,
 				EDE989D528D0C19100D6CDEF /* Assets.xcassets in Resources */,
+				ED5F036128D513B3003FC51F /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,12 +350,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5F036428D53722003FC51F /* API.swift in Sources */,
 				ED5F035728D3928D003FC51F /* ArticlesApiRepo.swift in Sources */,
 				EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */,
 				EDE989D128D0C18D00D6CDEF /* NewzApp.swift in Sources */,
 				ED53C95028D2449700001A56 /* NewzModel.xcdatamodeld in Sources */,
 				ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */,
 				ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */,
+				ED5DF17A28D75F2600ACD07C /* Mockable.swift in Sources */,
 				ED5F035C28D47DC6003FC51F /* ArticlesDbRepo.swift in Sources */,
 				ED53C95528D248A200001A56 /* Article.swift in Sources */,
 				ED53C95728D249FF00001A56 /* Article+CoreData.swift in Sources */,

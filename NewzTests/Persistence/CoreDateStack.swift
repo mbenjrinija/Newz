@@ -12,15 +12,15 @@ import CoreData
 
 final class TestCoreDataStack: XCTestCase {
 
-  var dataStack: CoreDataTestStack!
+  var persistentStore: CoreDataTestStack!
   var subs = Set<AnyCancellable>()
 
   override func setUpWithError() throws {
-    dataStack = CoreDataTestStack()
+    persistentStore = CoreDataTestStack()
   }
 
   override func tearDownWithError() throws {
-    dataStack = nil
+    persistentStore = nil
   }
 
   func test_InitStack_StoreLoaded() throws {
@@ -30,7 +30,7 @@ final class TestCoreDataStack: XCTestCase {
     let expectation = expectation(description: #function)
 
     // When
-    dataStack.isStoreLoaded
+    persistentStore.isStoreLoaded
       .first(where: { $0 })
       .sinkToResult { value in
         result = value
@@ -41,6 +41,30 @@ final class TestCoreDataStack: XCTestCase {
 
     // Then
     result!.assertSuccess(to: expected)
+  }
+
+  func test_saveAndFetch_success() {
+    // Given
+    let expected = Article.mock
+    let expectation = expectation(description: #function)
+    var result: [Article]?
+
+    persistentStore.save(expected)
+      .sinkToResult {[weak self] _ in
+        guard let self = self else { return }
+        // When
+        self.persistentStore.fetch(Article.self) {
+          Article.fetchRequest
+        }.sinkToResult { results in
+          result = try? results.get()
+          expectation.fulfill()
+        }.store(in: &(self.subs))
+      }.store(in: &subs)
+
+    wait(for: [expectation], timeout: 1)
+    // Then
+    XCTAssertEqual(result?.sorted(), expected.sorted(),
+                   "\(#file) > \(#function) Data not saved correctly")
   }
 
 }

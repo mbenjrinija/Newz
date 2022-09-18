@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-extension Article {
+extension Article: Persistable {
 
   init(managedObject: ArticleManagedObject) {
     self.author = managedObject.author
@@ -37,4 +37,6 @@ extension Article {
     article.publishedAt = self.publishedAt
     return article
   }
+
+  static var fetchRequest: NSFetchRequest<ArticleManagedObject> { ArticleManagedObject.fetchRequest() }
 }
