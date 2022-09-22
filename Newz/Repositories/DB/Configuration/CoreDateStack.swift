@@ -17,7 +17,7 @@ protocol PersistentStore {
 
 }
 
-protocol Persistable where ManagedObject: NSManagedObject {
+protocol Persistable: Equatable where ManagedObject: NSManagedObject {
   associatedtype ManagedObject
   init(managedObject: ManagedObject)
   func managedObject(context: NSManagedObjectContext) -> ManagedObject
@@ -25,18 +25,19 @@ protocol Persistable where ManagedObject: NSManagedObject {
 }
 
 class CoreDataStack {
-
-  public let container = NSPersistentContainer(name: "NewzModel")
+  static let name = "NewzModel"
+  public let container = NSPersistentContainer(name: name)
   public let isStoreLoaded = CurrentValueSubject<Bool, Error>(false)
   private let backgroundQueue = DispatchQueue(label: "coredata")
   private var subscribers = Set<AnyCancellable>()
 
-  public init() {
-    configureContainer()
+  public init(storeDescription: NSPersistentStoreDescription? = nil) {
+    if let storeDescription = storeDescription {
+      container.persistentStoreDescriptions = [storeDescription]
+    }
     loadPersistentStores()
   }
 
-  open func configureContainer() {}
   func loadPersistentStores() {
     backgroundQueue.async { [weak container, isStoreLoaded] in
       container?.loadPersistentStores { _, error in

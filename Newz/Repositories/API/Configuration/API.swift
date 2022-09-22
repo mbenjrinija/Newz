@@ -34,6 +34,11 @@ enum APIError: Error {
   case unexpectedResponse
 }
 
+typealias HTTPCodes = Range<Int>
+extension HTTPCodes {
+  static let success = 200..<300
+}
+
 extension Publisher where Output == URLSession.DataTaskPublisher.Output {
   func mapData(successCodes: HTTPCodes = .success) -> AnyPublisher<Data, Error> {
     tryMap { data, response in
@@ -53,44 +58,8 @@ extension Publisher where Output == URLSession.DataTaskPublisher.Output {
   func decodeData<T>(successCodes: HTTPCodes = .success)
         -> AnyPublisher<T, Error> where T: Decodable {
     mapData(successCodes: successCodes)
-      .decode(type: T.self, decoder: JSONDecoder())
+      .decode(type: T.self, decoder: JSONDecoder.default)
       .receive(on: DispatchQueue.main)
       .eraseToAnyPublisher()
   }
-}
-
-typealias HTTPCodes = Range<Int>
-extension HTTPCodes {
-  static let success = 200..<300
-}
-
-protocol ApiRepository {
-  var session: URLSession { get }
-}
-
-extension ApiRepository {
-  func call<Value>(endpoint: APICall) -> AnyPublisher<Value, Error> where Value: Decodable {
-    do {
-      let request = try endpoint.request(baseURL: Self.baseUrl)
-      return session
-        .dataTaskPublisher(for: request)
-        .decodeData()
-    } catch let error {
-      return Fail<Value, Error>(error: error).eraseToAnyPublisher()
-    }
-  }
-}
-
-extension ApiRepository {
-  /// Api Keys SHOULD NOT be stored in client
-  /// Exception for demo purposes
-  /// Force unwrap values to intentionally crash if config.plist is not created
-  static var apiKey: String {
-    get {
-      let filePath = Bundle.main.path(forResource: "config", ofType: "plist")!
-      let plist = NSDictionary(contentsOfFile: filePath)
-      return plist?.object(forKey: "API_KEY") as! String
-    }
-  }
-  static var baseUrl: String { "https://api.mediastack.com/v1" }
 }

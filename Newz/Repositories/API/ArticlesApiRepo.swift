@@ -21,7 +21,12 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
   }
 
   func fetchArticles() -> AnyPublisher<[Article], Error> {
-    call(endpoint: API.getArticles)
+    let request: AnyPublisher<ArrayResult<Article>, Error> =
+      call(endpoint: API.getArticles)
+    return request
+      .map(\.data)
+      .replaceNil(with: [])
+      .eraseToAnyPublisher()
   }
 
 }

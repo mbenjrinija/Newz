@@ -33,4 +33,10 @@ extension Result where Success: Equatable {
       XCTFail(error.localizedDescription)
     }
   }
+
+  func assertSuccess(file: StaticString = #file, line: UInt = #line) {
+    if case .failure(let failure) = self {
+      XCTFail("Failed with error \(failure)")
+    }
+  }
 }

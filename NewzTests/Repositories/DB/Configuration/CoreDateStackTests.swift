@@ -12,25 +12,27 @@ import CoreData
 
 final class TestCoreDataStack: XCTestCase {
 
-  var persistentStore: CoreDataTestStack!
+  var sut: CoreDataStack!
   var subs = Set<AnyCancellable>()
 
   override func setUpWithError() throws {
-    persistentStore = CoreDataTestStack()
+    let storeDescription = NSPersistentStoreDescription()
+    storeDescription.type = NSInMemoryStoreType
+    sut = CoreDataStack(storeDescription: storeDescription)
   }
 
   override func tearDownWithError() throws {
-    persistentStore = nil
+    sut = nil
   }
 
-  func test_InitStack_StoreLoaded() throws {
+  func test_initPersistentStore_loadedSuccess() throws {
     // Given
     let expected = true
     var result: Result<Bool, Error>?
     let expectation = expectation(description: #function)
 
     // When
-    persistentStore.isStoreLoaded
+    sut.isStoreLoaded
       .first(where: { $0 })
       .sinkToResult { value in
         result = value
@@ -45,20 +47,17 @@ final class TestCoreDataStack: XCTestCase {
 
   func test_saveAndFetch_success() {
     // Given
-    let expected = Article.mock
+    let expected = Article.stub
     let expectation = expectation(description: #function)
     var result: [Article]?
 
-    persistentStore.save(expected)
-      .sinkToResult {[weak self] _ in
-        guard let self = self else { return }
+    sut.save(expected)
+      .flatMap { _ in
         // When
-        self.persistentStore.fetch(Article.self) {
-          Article.fetchRequest
-        }.sinkToResult { results in
-          result = try? results.get()
-          expectation.fulfill()
-        }.store(in: &(self.subs))
+        self.sut.fetch(Article.self) { Article.fetchRequest }
+      }.sinkToResult { results in
+        result = try? results.get()
+        expectation.fulfill()
       }.store(in: &subs)
 
     wait(for: [expectation], timeout: 1)
@@ -67,12 +66,4 @@ final class TestCoreDataStack: XCTestCase {
                    "\(#file) > \(#function) Data not saved correctly")
   }
 
-}
-
-class CoreDataTestStack: CoreDataStack {
-  override func configureContainer() {
-    let storeDescription = NSPersistentStoreDescription()
-    storeDescription.type = NSInMemoryStoreType
-    container.persistentStoreDescriptions = [storeDescription]
-  }
 }
