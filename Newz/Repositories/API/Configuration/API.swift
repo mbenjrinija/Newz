@@ -32,6 +32,7 @@ enum APIError: Error {
   case httpCode(Int)
   case invalidURL
   case unexpectedResponse
+  case apiKeyNotFound
 }
 
 typealias HTTPCodes = Range<Int>

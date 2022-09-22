@@ -22,7 +22,7 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
 
   func fetchArticles() -> AnyPublisher<[Article], Error> {
     let request: AnyPublisher<ArrayResult<Article>, Error> =
-      call(endpoint: API.getArticles)
+      call(endpoint: Call.getArticles)
     return request
       .map(\.data)
       .replaceNil(with: [])
@@ -32,12 +32,12 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
 }
 
 extension ArticlesApiRepoImpl {
-  enum API {
+  enum Call {
     case getArticles
   }
 }
 
-extension ArticlesApiRepoImpl.API: APICall {
+extension ArticlesApiRepoImpl.Call: APICall {
   var path: String {
     switch self {
     case .getArticles:

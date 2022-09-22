@@ -39,4 +39,15 @@ extension Result where Success: Equatable {
       XCTFail("Failed with error \(failure)")
     }
   }
+
+  func assertFailure(_ failure: Error? = nil) {
+    switch self {
+    case .success:
+      XCTFail("Expected Failure didn't occure")
+    case .failure(let error):
+      if let failure = failure {
+        XCTAssertEqual(failure.localizedDescription, error.localizedDescription)
+      }
+    }
+  }
 }

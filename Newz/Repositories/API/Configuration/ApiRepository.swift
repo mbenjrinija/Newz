@@ -30,10 +30,11 @@ extension ApiRepository {
   /// Exception for demo purposes
   /// Force unwrap values to intentionally crash if config.plist is not created
   static var apiKey: String {
-    get {
+    get throws {
       let filePath = Bundle.main.path(forResource: "config", ofType: "plist")!
       let plist = NSDictionary(contentsOfFile: filePath)
-      return plist?.object(forKey: "API_KEY") as! String
+      return try (plist?.object(forKey: "API_KEY") as? String) ??
+                  { throw APIError.apiKeyNotFound }()
     }
   }
   static var baseUrl: String { "https://api.mediastack.com/v1" }

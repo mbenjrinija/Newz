@@ -21,6 +21,7 @@ final class ArticlesApiRepoTests: XCTestCase {
 
   override func tearDownWithError() throws {
     sut = nil
+    MockUrlProtocol.reset()
   }
 
   func test_fetchArticles() throws {
@@ -28,12 +29,12 @@ final class ArticlesApiRepoTests: XCTestCase {
     let expectation = expectation(description: "Fetching articles")
     let expected = Article.stub
     var results: [Article]?
-    let call = ArticlesApiRepoImpl.API.getArticles
+    let call = ArticlesApiRepoImpl.Call.getArticles
 
     let mockResponse = MockResponse(
       url: try XCTUnwrap(try? call.request(baseURL: ArticlesApiRepoImpl.baseUrl).url?.absoluteString),
-      result: .success(StubDummy.loadData(for: .articles)!))
-    MockUrlProtocol.mockResponses.append(mockResponse)
+      result: .success(try StubDummy.loadData(for: .articles)))
+    MockUrlProtocol.register(mock: mockResponse)
     // When
     sut.fetchArticles()
       .sinkToResult { result in

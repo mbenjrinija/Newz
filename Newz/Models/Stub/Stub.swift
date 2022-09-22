@@ -13,28 +13,22 @@ protocol Stub {
 
 extension Article: Stub {
   static var stub: [Article] {
-    Self.loadJson(of: ArrayResult<Article>.self, for: .articles)?.data ?? []
+    try! Self.loadJson(of: ArrayResult<Article>.self, for: .articles).data!
   }
 }
 
 extension Stub {
   static func loadJson<T: Decodable>(of type: T.Type,
-                                     for file: StubFile) -> T? {
-    do {
-      let data = try loadData(for: file) ?? { throw StubError.fileNotFound }()
-      let jsonData = try JSONDecoder.default.decode(T.self, from: data)
-      return jsonData
-    } catch {
-      print("error: \(#file) \(error)")
-    }
-    return nil
+                                     for file: StubFile) throws -> T {
+    let data = try loadData(for: file)
+    let jsonData = try JSONDecoder.default.decode(T.self, from: data)
+    return jsonData
   }
 
-  static func loadData(for file: StubFile) -> Data? {
-    if let url = Bundle.main.url(forResource: file.rawValue, withExtension: "json") {
-      return try? Data(contentsOf: url)
-    }
-    return nil
+  static func loadData(for file: StubFile) throws -> Data {
+    let url = try Bundle.main.url(forResource: file.rawValue, withExtension: "json") ??
+              { throw StubError.fileNotFound }()
+    return try Data(contentsOf: url)
   }
 
 }

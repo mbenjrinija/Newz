@@ -14,14 +14,22 @@ struct MockResponse {
   var delay: TimeInterval = 0.1
   var headers: [String: String] = ["Content-Type": "application/json"]
   var code: Int = 200
-
+  var response: URLResponse?
 }
 
 class MockUrlProtocol: URLProtocol {
-  static var mockResponses: [MockResponse] = []
+  private static var mockResponses: [MockResponse] = []
 
   static func mockResponse(for url: String) -> MockResponse? {
     Self.mockResponses.first(where: { $0.url == url })
+  }
+
+  static func register(mock: MockResponse) {
+    mockResponses.append(mock)
+  }
+
+  static func reset() {
+    mockResponses.removeAll()
   }
 
   // MARK: - URLProtocol methods
@@ -41,12 +49,13 @@ class MockUrlProtocol: URLProtocol {
   override func startLoading() {
     if let url = request.url,
        let mockResponse = MockUrlProtocol.mockResponse(for: url.absoluteString),
-       let response = HTTPURLResponse(url: url,
+       let response = mockResponse.response ??
+                      HTTPURLResponse(url: url,
                         statusCode: mockResponse.code,
                         httpVersion: "HTTP/1.1",
                         headerFields: mockResponse.headers) {
-      DispatchQueue.main
-        .asyncAfter(deadline: .now() + mockResponse.delay) { [weak self] in
+        DispatchQueue.main
+          .asyncAfter(deadline: .now() + mockResponse.delay) { [weak self] in
         guard let self = self else { return }
         self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         switch mockResponse.result {
