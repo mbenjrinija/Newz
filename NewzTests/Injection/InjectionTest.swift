@@ -13,7 +13,7 @@ final class Injection: XCTestCase {
   @Inject(.Repository.Db.articles) var sut: ArticlesDbRepository
 
   override func setUpWithError() throws {
-    DIContainer.default.register(injectable: .Provider.persistentStore) { _ in
+    DIContainer.default.register(.Provider.persistentStore) { _ in
       CoreDataStackMock()
     }
   }
@@ -24,9 +24,9 @@ final class Injection: XCTestCase {
 
   func test_injection_success() throws {
     // Given
-    DIContainer.default.register(injectable: .Repository.Db.articles) { injector in
+    DIContainer.default.register(.Repository.Db.articles) { injector in
       ArticlesDbRepoImpl(persistentStore:
-                          try injector.resolve(injectable: .Provider.persistentStore))
+                          try injector.resolve(.Provider.persistentStore))
     }
     // When: using the injected value
     // Then
@@ -37,7 +37,7 @@ final class Injection: XCTestCase {
     // Given: No initial configuration
     // When: Calling the injected value
     // Then
-    XCTAssertThrowsError(try DIContainer.default.resolve(injectable: .Repository.Db.articles))
+    XCTAssertThrowsError(try DIContainer.default.resolve(.Repository.Db.articles))
   }
 
 }

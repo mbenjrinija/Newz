@@ -9,36 +9,8 @@ import Foundation
 
 /// Dependency Injector
 protocol Injector {
-  func register<Value>(injectable: Injectable<Value>, resolve: (Injector) throws -> Value)
-  func resolve<Value>(injectable: Injectable<Value>) throws -> Value
-}
-
-/// Dependency Injection Container
-class DIContainer: Injector {
-
-  static var `default` = DIContainer()
-
-  private init() { }
-
-  private var components = [String: Any]()
-
-  func register<T>(injectable: Injectable<T>, resolve: (Injector) throws -> T) {
-    do {
-      components[injectable.identifier] = try resolve(self)
-    } catch {
-      fatalError(error.localizedDescription)
-    }
-  }
-
-  func resolve<T>(injectable: Injectable<T>) throws -> T {
-    try (components[injectable.identifier] as? T) ?? {
-      throw InjectionError.unregistered
-    }()
-  }
-
-  func reset() {
-    components.removeAll()
-  }
+  func register<Value>(_ injectable: Injectable<Value>, resolve: (Injector) throws -> Value) -> Self
+  func resolve<Value>(_ injectable: Injectable<Value>) throws -> Value
 }
 
 /// A read only Property Wrapper
@@ -47,7 +19,7 @@ struct Inject<T> {
   private let injectable: Injectable<T>
   var wrappedValue: T {
     // force unwrap > crash if value doesn't exist
-    get { try! DIContainer.default.resolve(injectable: injectable) }
+    get { try! DIContainer.default.resolve(injectable) }
   }
 
   init(_ injectable: Injectable<T>) {

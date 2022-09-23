@@ -14,6 +14,8 @@
 		ED29E7EC28DBA97D00F50035 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7EB28DBA97D00F50035 /* MockAPI.swift */; };
 		ED29E7F028DC7A7C00F50035 /* ApiRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7EF28DC7A7C00F50035 /* ApiRepositoryTest.swift */; };
 		ED29E7F228DCBD8900F50035 /* InjectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7F128DCBD8900F50035 /* InjectionTest.swift */; };
+		ED29E7F728DCEEC200F50035 /* ArticlesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7F628DCEEC200F50035 /* ArticlesService.swift */; };
+		ED29E7F928DD033200F50035 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7F828DD033200F50035 /* DIContainer.swift */; };
 		ED53C95028D2449700001A56 /* NewzModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED53C94E28D2449700001A56 /* NewzModel.xcdatamodeld */; };
 		ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95128D245DE00001A56 /* CoreDateStack.swift */; };
 		ED53C95528D248A200001A56 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95428D248A200001A56 /* Article.swift */; };
@@ -54,6 +56,8 @@
 		ED29E7EB28DBA97D00F50035 /* MockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
 		ED29E7EF28DC7A7C00F50035 /* ApiRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRepositoryTest.swift; sourceTree = "<group>"; };
 		ED29E7F128DCBD8900F50035 /* InjectionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionTest.swift; sourceTree = "<group>"; };
+		ED29E7F628DCEEC200F50035 /* ArticlesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesService.swift; sourceTree = "<group>"; };
+		ED29E7F828DD033200F50035 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		ED53C94F28D2449700001A56 /* NewzModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewzModel.xcdatamodel; sourceTree = "<group>"; };
 		ED53C95128D245DE00001A56 /* CoreDateStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateStack.swift; sourceTree = "<group>"; };
 		ED53C95428D248A200001A56 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
@@ -127,6 +131,22 @@
 				ED29E7F128DCBD8900F50035 /* InjectionTest.swift */,
 			);
 			path = Injection;
+			sourceTree = "<group>";
+		};
+		ED29E7F428DCEE1B00F50035 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDE989D228D0C18D00D6CDEF /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED29E7F528DCEE4600F50035 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ED29E7F628DCEEC200F50035 /* ArticlesService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		ED53C94D28D2447000001A56 /* Configuration */ = {
@@ -236,6 +256,7 @@
 			children = (
 				ED5F035928D394DA003FC51F /* Injectable.swift */,
 				ED5F035D28D4A1F5003FC51F /* Injector.swift */,
+				ED29E7F828DD033200F50035 /* DIContainer.swift */,
 			);
 			path = Injection;
 			sourceTree = "<group>";
@@ -280,11 +301,12 @@
 		EDE989CF28D0C18D00D6CDEF /* Newz */ = {
 			isa = PBXGroup;
 			children = (
-				ED5F035828D394C4003FC51F /* Injection */,
-				EDDDB7DA28D36812009AFBD5 /* Repositories */,
-				ED53C95328D2488A00001A56 /* Models */,
 				EDE989DE28D0C23400D6CDEF /* System */,
-				EDE989D228D0C18D00D6CDEF /* ContentView.swift */,
+				ED5F035828D394C4003FC51F /* Injection */,
+				ED53C95328D2488A00001A56 /* Models */,
+				EDDDB7DA28D36812009AFBD5 /* Repositories */,
+				ED29E7F528DCEE4600F50035 /* Services */,
+				ED29E7F428DCEE1B00F50035 /* Views */,
 				EDE989D428D0C19100D6CDEF /* Assets.xcassets */,
 				EDE989D628D0C19100D6CDEF /* Preview Content */,
 			);
@@ -456,7 +478,9 @@
 				ED53C95028D2449700001A56 /* NewzModel.xcdatamodeld in Sources */,
 				ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */,
 				ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */,
+				ED29E7F928DD033200F50035 /* DIContainer.swift in Sources */,
 				ED29E7EA28DB977600F50035 /* ApiRepository.swift in Sources */,
+				ED29E7F728DCEEC200F50035 /* ArticlesService.swift in Sources */,
 				ED5DF17A28D75F2600ACD07C /* Stub.swift in Sources */,
 				ED5F035C28D47DC6003FC51F /* ArticlesDbRepo.swift in Sources */,
 				ED53C95528D248A200001A56 /* Article.swift in Sources */,

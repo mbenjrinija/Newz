@@ -12,6 +12,10 @@ struct NewzApp: App {
   var body: some Scene {
     WindowGroup {
         ContentView()
+        .onReceive(NotificationCenter.default
+          .publisher(for: UIScene.willConnectNotification)) { _ in
+            try! DIContainer.configure()
+        }
     }
   }
 }

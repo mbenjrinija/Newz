@@ -14,6 +14,7 @@ struct Injectable<T> {
 }
 
 extension Injectable {
+  struct Service {}
   struct Provider {}
   struct Repository {
     struct Db { }
@@ -31,4 +32,8 @@ extension Injectable.Repository.Api {
 
 extension Injectable.Provider {
   static var persistentStore: Injectable<PersistentStore> { .init() }
+}
+
+extension Injectable.Service {
+  static var articles: Injectable<ArticlesService> { .init() }
 }
