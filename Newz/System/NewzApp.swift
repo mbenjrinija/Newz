@@ -9,13 +9,12 @@ import SwiftUI
 
 @main
 struct NewzApp: App {
+  init() {
+    try! DIContainer.configure()
+  }
   var body: some Scene {
     WindowGroup {
         ContentView()
-        .onReceive(NotificationCenter.default
-          .publisher(for: UIScene.willConnectNotification)) { _ in
-            try! DIContainer.configure()
-        }
     }
   }
 }

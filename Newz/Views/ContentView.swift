@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+
+  @Inject(.Service.articles) var articlesService: ArticlesService
+
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    HomeView()
   }
+
 }
 
 struct ContentView_Previews: PreviewProvider {

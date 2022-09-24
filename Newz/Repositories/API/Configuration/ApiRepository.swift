@@ -15,7 +15,7 @@ protocol ApiRepository {
 extension ApiRepository {
   func call<Value>(endpoint: APICall) -> AnyPublisher<Value, Error> where Value: Decodable {
     do {
-      let request = try endpoint.request(baseURL: Self.baseUrl)
+      let request = try endpoint.request(baseURL: Constants.API.baseUrl)
       return session
         .dataTaskPublisher(for: request)
         .decodeData()
@@ -25,17 +25,27 @@ extension ApiRepository {
   }
 }
 
-extension ApiRepository {
-  /// Api Keys SHOULD NOT be stored in client
-  /// Exception for demo purposes
-  /// Force unwrap values to intentionally crash if config.plist is not created
-  static var apiKey: String {
-    get throws {
-      let filePath = Bundle.main.path(forResource: "config", ofType: "plist")!
-      let plist = NSDictionary(contentsOfFile: filePath)
-      return try (plist?.object(forKey: "API_KEY") as? String) ??
-                  { throw APIError.apiKeyNotFound }()
-    }
+extension Publisher where Output == URLSession.DataTaskPublisher.Output {
+  func mapData(successCodes: HTTPCodes = .success) -> AnyPublisher<Data, Error> {
+    tryMap { data, response in
+      // extract status code
+      guard let code = (response as? HTTPURLResponse)?.statusCode else {
+        throw APIError.unexpectedResponse
+      }
+      // throw if status code is out of success range
+      guard successCodes.contains(code) else {
+        throw APIError.httpCode(code)
+      }
+      // return data object
+      return data
+    }.eraseToAnyPublisher()
   }
-  static var baseUrl: String { "https://api.mediastack.com/v1" }
+
+  func decodeData<T>(successCodes: HTTPCodes = .success)
+  -> AnyPublisher<T, Error> where T: Decodable {
+    mapData(successCodes: successCodes)
+      .decode(type: T.self, decoder: JSONDecoder.default)
+      .receive(on: DispatchQueue.main)
+      .eraseToAnyPublisher()
+  }
 }

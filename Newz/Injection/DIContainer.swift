@@ -12,9 +12,9 @@ class DIContainer: Injector {
   static var `default` = DIContainer()
   private var components = [String: Any]()
   private init() { }
-  
+
   @discardableResult // for chaining
-  func register<T>(_ injectable: Injectable<T>, resolve: (Injector) throws -> T) -> Self{
+  func register<T>(_ injectable: Injectable<T>, resolve: (Injector) throws -> T) -> Self {
     do {
       components[injectable.identifier] = try resolve(self)
     } catch {
@@ -22,27 +22,25 @@ class DIContainer: Injector {
     }
     return self
   }
-  
+
   func resolve<T>(_ injectable: Injectable<T>) throws -> T {
     try (components[injectable.identifier] as? T) ?? {
-      throw InjectionError.unregistered
+      throw InjectionError.unregistered(injectable.identifier)
     }()
   }
-  
+
   func reset() {
     components.removeAll()
   }
 }
 
-
-
 // MARK: - DI Configuration
 extension DIContainer {
-  
+
   static func configure() throws {
-    let urlSession = configuredURLSession()
+    let urlSession: URLSession = .default
     Self.default
-      .register(.Provider.persistentStore){ _ in
+      .register(.Provider.persistentStore) { _ in
         CoreDataStack()
       }.register(.Repository.Db.articles) { resolver in
         ArticlesDbRepoImpl(persistentStore: try resolver.resolve(.Provider.persistentStore))
@@ -53,8 +51,11 @@ extension DIContainer {
                             apiRepository: try resolver.resolve(.Repository.Api.articles))
       }
   }
-  
-  private static func configuredURLSession() -> URLSession {
+
+}
+
+extension URLSession {
+  static var `default`: URLSession {
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 60
     configuration.timeoutIntervalForResource = 120
@@ -63,5 +64,4 @@ extension DIContainer {
     configuration.urlCache = .shared
     return URLSession(configuration: configuration)
   }
-  
 }

@@ -28,5 +28,5 @@ struct Inject<T> {
 }
 
 enum InjectionError: Error {
-  case unregistered
+  case unregistered(String)
 }

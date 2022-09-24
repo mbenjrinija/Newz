@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ArticlesApiRepository: ApiRepository {
-  func fetchArticles() -> AnyPublisher<[Article], Error>
+  func fetchArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error>
 }
 
 struct ArticlesApiRepoImpl: ArticlesApiRepository {
@@ -20,28 +20,24 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
     self.session = session
   }
 
-  func fetchArticles() -> AnyPublisher<[Article], Error> {
-    let request: AnyPublisher<ArrayResult<Article>, Error> =
-      call(endpoint: Call.getArticles)
-    return request
-      .map(\.data)
-      .replaceNil(with: [])
-      .eraseToAnyPublisher()
+  func fetchArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error> {
+      call(endpoint: Call.getArticles(criteria)).eraseToAnyPublisher()
   }
 
 }
 
 extension ArticlesApiRepoImpl {
   enum Call {
-    case getArticles
+    case getArticles(Article.Criteria)
   }
 }
 
 extension ArticlesApiRepoImpl.Call: APICall {
+  var auth: AuthStrategy { MediaStackAuth() }
   var path: String {
     switch self {
     case .getArticles:
-      return "/new"
+      return "/news"
     }
   }
   var method: String {
@@ -53,7 +49,33 @@ extension ArticlesApiRepoImpl.Call: APICall {
   var headers: [String: String]? {
     return ["Accept": "application/json"]
   }
+
+  var params: [String: String]? {
+    switch self {
+    case .getArticles(let criteria):
+      return criteria.toDictionnary()
+    }
+  }
+
   func body() throws -> Data? {
     nil
   }
+
+  struct Criteria {
+    struct Article {
+      var sources: [String]?
+      var categories: [String]?
+      var countries: [String]?
+      var languages: [String]?
+      var keywords: [String]?
+      var mindDate: Date?
+      var maxDate: Date?
+    }
+    enum Sort: String {
+      case publishedDesc = "published_desc"
+      case publishedAsc = "published_asc"
+      case popularity = "popularity"
+    }
+  }
+
 }

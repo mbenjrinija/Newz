@@ -9,39 +9,26 @@ import Foundation
 import Combine
 
 protocol ArticlesService {
-  func loadLiveArticles(filter: Criteria.Article?, sort: Criteria.Sort?,
-                    limit: Int, offset: Int) -> AnyPublisher<[Article], Error>
-  
+  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error>
   func loadSavedArticles() -> AnyPublisher<[Article], Error>
 }
 
 struct ArticlesServiceImpl: ArticlesService {
   let persistentStore: ArticlesDbRepository
   let apiRepository: ArticlesApiRepository
-  
-  func loadLiveArticles(filter: Criteria.Article?, sort: Criteria.Sort?,
-                    limit: Int, offset: Int) -> AnyPublisher<[Article], Error> {
-    Empty().eraseToAnyPublisher()
-  }
-  
-  func loadSavedArticles() -> AnyPublisher<[Article], Error> {
-    Empty().eraseToAnyPublisher()
-  }
-}
 
-struct Criteria {
-  struct Article {
-    var sources: [String]?
-    var categories: [String]?
-    var countries: [String]?
-    var languages: [String]?
-    var keywords: [String]?
-    var mindDate: Date?
-    var maxDate: Date?
+  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error> {
+    // apiRepository.fetchArticles(criteria: criteria)
+    // temp mock result
+    Future<ArrayResult<Article>, Error> { promise in
+      DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(4)) {
+        let data = try! Article.loadJson(of: ArrayResult<Article>.self, for: .articles)
+        promise(.success(data))
+      }
+    }.eraseToAnyPublisher()
   }
-  enum Sort: String {
-    case publishedDesc = "published_desc"
-    case publishedAsc = "published_asc"
-    case popularity = "popularity"
+
+  func loadSavedArticles() -> AnyPublisher<[Article], Error> {
+    persistentStore.fetchArticles()
   }
 }

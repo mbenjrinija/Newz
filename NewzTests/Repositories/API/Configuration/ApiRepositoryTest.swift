@@ -27,7 +27,7 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.success
     let expected = TestApiRepository.Model()
-    let url = TestApiRepository.baseUrl + call.path
+    let url = Constants.API.baseUrl + call.path
     let response = MockResponse.init(url: url, result:
         .success(try JSONEncoder().encode(expected)))
     MockUrlProtocol.register(mock: response)
@@ -52,7 +52,7 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.urlError
     let expected = TestApiRepository.Model()
-    let url = TestApiRepository.baseUrl + call.path
+    let url = Constants.API.baseUrl + call.path
     let response = MockResponse.init(url: url, result:
         .success(try JSONEncoder().encode(expected)))
     MockUrlProtocol.register(mock: response)
@@ -76,7 +76,7 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.bodyError
     let expected = TestApiRepository.Model()
-    let url = TestApiRepository.baseUrl + call.path
+    let url = Constants.API.baseUrl + call.path
     let response = MockResponse.init(url: url, result:
         .success(try JSONEncoder().encode(expected)))
     MockUrlProtocol.register(mock: response)
@@ -100,7 +100,7 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.noHttpCodeError
     let expected = TestApiRepository.Model()
-    let url = TestApiRepository.baseUrl + call.path
+    let url = Constants.API.baseUrl + call.path
     let urlResponse = URLResponse(url: URL(fileURLWithPath: ""),
                                   mimeType: "example",
                                   expectedContentLength: 0,
@@ -125,7 +125,7 @@ final class ApiRepositoryTests: XCTestCase {
   }
 
   func test_getApiKey_success() {
-    let apiKey = try? TestApiRepository.apiKey
+    let apiKey = try? Constants.API.apiKey
     XCTAssertNotNil(apiKey)
   }
 }
@@ -149,6 +149,7 @@ class TestApiRepository: ApiRepository {
     }
     var method: String { "POST" }
     var headers: [String: String]? { nil }
+    var params: [String: String]? { nil }
     func body() throws -> Data? {
       if self == .bodyError { throw APIError.fail }
       return nil

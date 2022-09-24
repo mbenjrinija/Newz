@@ -32,7 +32,7 @@ final class ArticlesApiRepoTests: XCTestCase {
     let call = ArticlesApiRepoImpl.Call.getArticles
 
     let mockResponse = MockResponse(
-      url: try XCTUnwrap(try? call.request(baseURL: ArticlesApiRepoImpl.baseUrl).url?.absoluteString),
+      url: try XCTUnwrap(try? call.request(baseURL: Constants.API.baseUrl).url?.absoluteString),
       result: .success(try StubDummy.loadData(for: .articles)))
     MockUrlProtocol.register(mock: mockResponse)
     // When
