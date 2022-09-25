@@ -10,7 +10,11 @@ import SwiftUI
 @main
 struct NewzApp: App {
   init() {
-    try! DIContainer.configure()
+    do {
+      try DIContainer.configure()
+    } catch {
+      fatalError("unable to configure DIContainer: \(error.localizedDescription)")
+    }
   }
   var body: some Scene {
     WindowGroup {

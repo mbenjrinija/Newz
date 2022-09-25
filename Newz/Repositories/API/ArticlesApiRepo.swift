@@ -61,21 +61,4 @@ extension ArticlesApiRepoImpl.Call: APICall {
     nil
   }
 
-  struct Criteria {
-    struct Article {
-      var sources: [String]?
-      var categories: [String]?
-      var countries: [String]?
-      var languages: [String]?
-      var keywords: [String]?
-      var mindDate: Date?
-      var maxDate: Date?
-    }
-    enum Sort: String {
-      case publishedDesc = "published_desc"
-      case publishedAsc = "published_asc"
-      case popularity = "popularity"
-    }
-  }
-
 }

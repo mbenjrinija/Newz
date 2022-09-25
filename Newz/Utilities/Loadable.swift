@@ -53,8 +53,10 @@ extension ObservableObject {
     let current = self[keyPath: loadable]
     return .init(get: { [weak self] in
       self?[keyPath: loadable] ?? current
-    }, set: { [weak self] in
-      self?[keyPath: loadable] = $0
+    }, set: { [weak self] value in
+      DispatchQueue.main.async {
+        self?[keyPath: loadable] = value
+      }
     })
   }
 }

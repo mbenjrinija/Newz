@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ArticlesService {
-  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error>
+  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<[Article], Error>
   func loadSavedArticles() -> AnyPublisher<[Article], Error>
 }
 
@@ -17,13 +17,13 @@ struct ArticlesServiceImpl: ArticlesService {
   let persistentStore: ArticlesDbRepository
   let apiRepository: ArticlesApiRepository
 
-  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error> {
+  func loadLiveArticles(criteria: Article.Criteria) -> AnyPublisher<[Article], Error> {
     // apiRepository.fetchArticles(criteria: criteria)
     // temp mock result
-    Future<ArrayResult<Article>, Error> { promise in
+    Future<[Article], Error> { promise in
       DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(4)) {
-        let data = try! Article.loadJson(of: ArrayResult<Article>.self, for: .articles)
-        promise(.success(data))
+        let data = try? Article.loadJson(of: ArrayResult<Article>.self, for: .articles).data
+        promise(.success(data ?? []))
       }
     }.eraseToAnyPublisher()
   }

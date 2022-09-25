@@ -13,6 +13,9 @@ struct Injectable<T> {
   init() { self.init(identifier: "\(T.self)") }
 }
 
+// allow nesting/shortNames for convenience reasons
+// swiftlint:disable nesting
+// swiftlint:disable type_name
 extension Injectable {
   struct Service {}
   struct Provider {}
@@ -21,6 +24,8 @@ extension Injectable {
     struct Api { }
   }
 }
+// swiftlint:enable nesting
+// swiftlint:enable type_name
 
 extension Injectable.Repository.Db {
   static var articles: Injectable<ArticlesDbRepository> { .init() }

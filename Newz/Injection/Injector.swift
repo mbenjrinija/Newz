@@ -18,8 +18,11 @@ protocol Injector {
 struct Inject<T> {
   private let injectable: Injectable<T>
   var wrappedValue: T {
-    // force unwrap > crash if value doesn't exist
-    get { try! DIContainer.default.resolve(injectable) }
+    do {
+      return try DIContainer.default.resolve(injectable)
+    } catch {
+      fatalError("\(injectable.identifier) Not Found :\(error.localizedDescription)")
+    }
   }
 
   init(_ injectable: Injectable<T>) {

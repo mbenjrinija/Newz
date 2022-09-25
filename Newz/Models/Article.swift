@@ -33,6 +33,7 @@ extension Article: Comparable {
 
 extension Article {
   struct Criteria {
+    var name: String
     var sources: [String]?
     var categories: [String]?
     var countries: [String]?
@@ -60,11 +61,10 @@ extension Article {
       ]
       return dic.compactMapValues { $0 }
     }
-
-    enum Sort: String {
-      case publishedDesc = "published_desc"
-      case publishedAsc = "published_asc"
-      case popularity = "popularity"
-    }
+  }
+  enum Sort: String {
+    case publishedDesc = "published_desc"
+    case publishedAsc = "published_asc"
+    case popularity = "popularity"
   }
 }

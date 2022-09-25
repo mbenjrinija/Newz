@@ -16,7 +16,7 @@ struct MediaStackAuth: AuthStrategy {
 
   func patch(params: [String: String]?) -> [String: String]? {
     var patchedParams = params ?? [:]
-    patchedParams["access_key"] = try! Constants.API.apiKey
+    patchedParams["access_key"] = try? Constants.API.apiKey
     return patchedParams
   }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED265A0028E0D18B0005D02B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2659FF28E0D18B0005D02B /* FeedView.swift */; };
+		ED265A0328E0D2760005D02B /* FeedPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED265A0228E0D2760005D02B /* FeedPager.swift */; };
+		ED265A0528E0D5300005D02B /* FeedTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED265A0428E0D5300005D02B /* FeedTabs.swift */; };
 		ED29E7E228DB460C00F50035 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7E128DB460C00F50035 /* Mock.swift */; };
 		ED29E7E528DB51B500F50035 /* CoreDataStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7E428DB51B500F50035 /* CoreDataStackMock.swift */; };
 		ED29E7E828DB904800F50035 /* StubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7E728DB904800F50035 /* StubTest.swift */; };
@@ -23,6 +26,7 @@
 		ED29E80C28DF07C400F50035 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E80B28DF07C400F50035 /* HomeViewModel.swift */; };
 		ED29E80E28DF1C4600F50035 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E80D28DF1C4600F50035 /* Loadable.swift */; };
 		ED29E81028DF354100F50035 /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED29E7EB28DBA97D00F50035 /* MockAPI.swift */; };
+		ED2A8B2228DF55D200CD2E87 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED2A8B2128DF55D200CD2E87 /* config.plist */; };
 		ED53C95028D2449700001A56 /* NewzModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED53C94E28D2449700001A56 /* NewzModel.xcdatamodeld */; };
 		ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95128D245DE00001A56 /* CoreDateStack.swift */; };
 		ED53C95528D248A200001A56 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53C95428D248A200001A56 /* Article.swift */; };
@@ -36,8 +40,8 @@
 		ED5F035A28D394DA003FC51F /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035928D394DA003FC51F /* Injectable.swift */; };
 		ED5F035C28D47DC6003FC51F /* ArticlesDbRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035B28D47DC6003FC51F /* ArticlesDbRepo.swift */; };
 		ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035D28D4A1F5003FC51F /* Injector.swift */; };
-		ED5F036128D513B3003FC51F /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED5F036028D513B3003FC51F /* config.plist */; };
 		ED5F036428D53722003FC51F /* ApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F036328D53722003FC51F /* ApiCall.swift */; };
+		ED82FE2728DF805800AFC4DC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */; };
 		EDDDB7D928D36429009AFBD5 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */; };
 		EDE989D128D0C18D00D6CDEF /* NewzApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D028D0C18D00D6CDEF /* NewzApp.swift */; };
 		EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE989D228D0C18D00D6CDEF /* ContentView.swift */; };
@@ -56,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED2659FF28E0D18B0005D02B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		ED265A0228E0D2760005D02B /* FeedPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPager.swift; sourceTree = "<group>"; };
+		ED265A0428E0D5300005D02B /* FeedTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTabs.swift; sourceTree = "<group>"; };
 		ED29E7E128DB460C00F50035 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		ED29E7E428DB51B500F50035 /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
 		ED29E7E728DB904800F50035 /* StubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTest.swift; sourceTree = "<group>"; };
@@ -69,10 +76,11 @@
 		ED29E7FD28DE1B5900F50035 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		ED29E7FF28DE1CFD00F50035 /* ArrayResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayResult.swift; sourceTree = "<group>"; };
 		ED29E80228DE2C1E00F50035 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		ED29E80728DE6A9B00F50035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ED29E80728DE6A9B00F50035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED29E80928DF077D00F50035 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ED29E80B28DF07C400F50035 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		ED29E80D28DF1C4600F50035 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
+		ED2A8B2128DF55D200CD2E87 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		ED53C94F28D2449700001A56 /* NewzModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewzModel.xcdatamodel; sourceTree = "<group>"; };
 		ED53C95128D245DE00001A56 /* CoreDateStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateStack.swift; sourceTree = "<group>"; };
 		ED53C95428D248A200001A56 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
@@ -87,8 +95,8 @@
 		ED5F035928D394DA003FC51F /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
 		ED5F035B28D47DC6003FC51F /* ArticlesDbRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDbRepo.swift; sourceTree = "<group>"; };
 		ED5F035D28D4A1F5003FC51F /* Injector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
-		ED5F036028D513B3003FC51F /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		ED5F036328D53722003FC51F /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCall.swift; sourceTree = "<group>"; };
+		ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		EDE989CD28D0C18D00D6CDEF /* Newz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE989D028D0C18D00D6CDEF /* NewzApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewzApp.swift; sourceTree = "<group>"; };
@@ -115,6 +123,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED2659FC28E0D1540005D02B /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				ED29E80828DF076C00F50035 /* Feeds */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		ED2659FD28E0D15A0005D02B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ED265A0128E0D25C0005D02B /* FeedTabView */,
+				ED2659FE28E0D1680005D02B /* FeedView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		ED2659FE28E0D1680005D02B /* FeedView */ = {
+			isa = PBXGroup;
+			children = (
+				ED2659FF28E0D18B0005D02B /* FeedView.swift */,
+				ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */,
+			);
+			path = FeedView;
+			sourceTree = "<group>";
+		};
+		ED265A0128E0D25C0005D02B /* FeedTabView */ = {
+			isa = PBXGroup;
+			children = (
+				ED265A0228E0D2760005D02B /* FeedPager.swift */,
+				ED265A0428E0D5300005D02B /* FeedTabs.swift */,
+			);
+			path = FeedTabView;
+			sourceTree = "<group>";
+		};
 		ED29E7E028DB460000F50035 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,13 +191,14 @@
 			path = Injection;
 			sourceTree = "<group>";
 		};
-		ED29E7F428DCEE1B00F50035 /* Views */ = {
+		ED29E7F428DCEE1B00F50035 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				ED29E80828DF076C00F50035 /* Home */,
+				ED2659FC28E0D1540005D02B /* Screens */,
+				ED2659FD28E0D15A0005D02B /* Components */,
 				EDE989D228D0C18D00D6CDEF /* ContentView.swift */,
 			);
-			path = Views;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		ED29E7F528DCEE4600F50035 /* Services */ = {
@@ -186,19 +230,21 @@
 		ED29E80428DE69A000F50035 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				ED29E80728DE6A9B00F50035 /* Info.plist */,
+				ED2A8B2128DF55D200CD2E87 /* config.plist */,
 				EDE989D428D0C19100D6CDEF /* Assets.xcassets */,
 				EDE989D628D0C19100D6CDEF /* Preview Content */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		ED29E80828DF076C00F50035 /* Home */ = {
+		ED29E80828DF076C00F50035 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
 				ED29E80928DF077D00F50035 /* HomeView.swift */,
 				ED29E80B28DF07C400F50035 /* HomeViewModel.swift */,
 			);
-			path = Home;
+			path = Feeds;
 			sourceTree = "<group>";
 		};
 		ED53C94D28D2447000001A56 /* Configuration */ = {
@@ -336,7 +382,6 @@
 		EDE989C428D0C18D00D6CDEF = {
 			isa = PBXGroup;
 			children = (
-				ED5F036028D513B3003FC51F /* config.plist */,
 				EDE989CF28D0C18D00D6CDEF /* Newz */,
 				ED53C95D28D25E6E00001A56 /* NewzTests */,
 				EDE989CE28D0C18D00D6CDEF /* Products */,
@@ -355,14 +400,13 @@
 		EDE989CF28D0C18D00D6CDEF /* Newz */ = {
 			isa = PBXGroup;
 			children = (
-				ED29E80728DE6A9B00F50035 /* Info.plist */,
 				ED29E7FA28DDEBBD00F50035 /* Utilities */,
 				EDE989DE28D0C23400D6CDEF /* System */,
 				ED5F035828D394C4003FC51F /* Injection */,
 				ED53C95328D2488A00001A56 /* Models */,
 				EDDDB7DA28D36812009AFBD5 /* Repositories */,
 				ED29E7F528DCEE4600F50035 /* Services */,
-				ED29E7F428DCEE1B00F50035 /* Views */,
+				ED29E7F428DCEE1B00F50035 /* UI */,
 				ED29E80428DE69A000F50035 /* SupportingFiles */,
 			);
 			path = Newz;
@@ -476,7 +520,7 @@
 				ED5DF17D28D7699E00ACD07C /* articles.json in Resources */,
 				EDE989D828D0C19100D6CDEF /* Preview Assets.xcassets in Resources */,
 				EDE989D528D0C19100D6CDEF /* Assets.xcassets in Resources */,
-				ED5F036128D513B3003FC51F /* config.plist in Resources */,
+				ED2A8B2228DF55D200CD2E87 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +544,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -527,6 +571,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED29E80C28DF07C400F50035 /* HomeViewModel.swift in Sources */,
+				ED265A0328E0D2760005D02B /* FeedPager.swift in Sources */,
+				ED265A0028E0D18B0005D02B /* FeedView.swift in Sources */,
+				ED265A0528E0D5300005D02B /* FeedTabs.swift in Sources */,
 				ED5F036428D53722003FC51F /* ApiCall.swift in Sources */,
 				ED5F035728D3928D003FC51F /* ArticlesApiRepo.swift in Sources */,
 				EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */,
@@ -546,6 +593,7 @@
 				ED53C95528D248A200001A56 /* Article.swift in Sources */,
 				ED53C95728D249FF00001A56 /* Article+CoreData.swift in Sources */,
 				ED29E80E28DF1C4600F50035 /* Loadable.swift in Sources */,
+				ED82FE2728DF805800AFC4DC /* FeedViewModel.swift in Sources */,
 				ED29E80328DE2C1E00F50035 /* Date+Extension.swift in Sources */,
 				ED5F035A28D394DA003FC51F /* Injectable.swift in Sources */,
 			);
@@ -725,7 +773,7 @@
 				DEVELOPMENT_TEAM = UZJUVD46BF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Newz/Info.plist;
+				INFOPLIST_FILE = Newz/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -756,7 +804,7 @@
 				DEVELOPMENT_TEAM = UZJUVD46BF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Newz/Info.plist;
+				INFOPLIST_FILE = Newz/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
