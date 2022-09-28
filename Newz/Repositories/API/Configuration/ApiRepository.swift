@@ -15,7 +15,7 @@ protocol ApiRepository {
 extension ApiRepository {
   func call<Value>(endpoint: APICall) -> AnyPublisher<Value, Error> where Value: Decodable {
     do {
-      let request = try endpoint.request(baseURL: Constants.API.baseUrl)
+      let request = try endpoint.request()
       return session
         .dataTaskPublisher(for: request)
         .decodeData()

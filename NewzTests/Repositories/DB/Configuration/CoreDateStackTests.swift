@@ -51,10 +51,12 @@ final class TestCoreDataStack: XCTestCase {
     let expectation = expectation(description: #function)
     var result: [Article]?
 
-    sut.save(expected)
-      .flatMap { _ in
+    sut.insert(expected)
+      .flatMap { _ -> AnyPublisher<[Article], Error> in
         // When
-        self.sut.fetch(Article.self) { Article.fetchRequest }
+        self.sut
+          .fetch(Article.self) { Article.fetchRequest }
+          .mapped()
       }.sinkToResult { results in
         result = try? results.get()
         expectation.fulfill()

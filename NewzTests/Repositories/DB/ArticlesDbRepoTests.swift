@@ -30,7 +30,7 @@ final class TestArticlesDbRepo: XCTestCase {
     let stub = Article.stub
     var results: [Article]?
     mockDataStack.recorder = .init(expected: [
-      .save("\(Article.self)", .init(inserted: stub.count, updated: 0, deleted: 0))
+      .insert("\(Article.self)", .init(inserted: stub.count, updated: 0, deleted: 0))
     ])
     let expectation = expectation(description: #function)
 

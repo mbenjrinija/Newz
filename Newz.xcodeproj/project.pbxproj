@@ -45,6 +45,8 @@
 		ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F035D28D4A1F5003FC51F /* Injector.swift */; };
 		ED5F036428D53722003FC51F /* ApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F036328D53722003FC51F /* ApiCall.swift */; };
 		ED82FE2728DF805800AFC4DC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */; };
+		ED91FBE428E47627001BF7DB /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91FBE328E47627001BF7DB /* ErrorAlert.swift */; };
+		ED91FBE928E4A578001BF7DB /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = ED91FBE828E4A578001BF7DB /* ViewInspector */; };
 		EDD7975628E22E780073756F /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975528E22E780073756F /* MultiPicker.swift */; };
 		EDD7975828E24C720073756F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975728E24C720073756F /* ButtonStyle.swift */; };
 		EDD7975B28E30F690073756F /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975A28E30F690073756F /* TagView.swift */; };
@@ -113,6 +115,7 @@
 		ED5F035D28D4A1F5003FC51F /* Injector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
 		ED5F036328D53722003FC51F /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCall.swift; sourceTree = "<group>"; };
 		ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		ED91FBE328E47627001BF7DB /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		EDD7975528E22E780073756F /* MultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPicker.swift; sourceTree = "<group>"; };
 		EDD7975728E24C720073756F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		EDD7975A28E30F690073756F /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED91FBE928E4A578001BF7DB /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,7 @@
 		ED2659FD28E0D15A0005D02B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				ED91FBE228E4761A001BF7DB /* ErrorAlert */,
 				EDD7975C28E313630073756F /* FlowLayout */,
 				EDD7975928E30F550073756F /* TagView */,
 				EDD7975428E22E620073756F /* MultiPicker */,
@@ -328,10 +333,11 @@
 		ED53C95D28D25E6E00001A56 /* NewzTests */ = {
 			isa = PBXGroup;
 			children = (
-				ED29E7F328DCC54900F50035 /* Injection */,
 				ED29E7E028DB460000F50035 /* Mock */,
+				ED29E7F328DCC54900F50035 /* Injection */,
 				ED5EF2B028D8E81A00BB91CE /* Repositories */,
 				ED29E7E628DB903300F50035 /* Models */,
+				ED91FBE528E49B56001BF7DB /* UI */,
 				EDDDB7D828D36429009AFBD5 /* TestHelpers.swift */,
 			);
 			path = NewzTests;
@@ -427,6 +433,29 @@
 				ED29E7FD28DE1B5900F50035 /* Authentication.swift */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		ED91FBE228E4761A001BF7DB /* ErrorAlert */ = {
+			isa = PBXGroup;
+			children = (
+				ED91FBE328E47627001BF7DB /* ErrorAlert.swift */,
+			);
+			path = ErrorAlert;
+			sourceTree = "<group>";
+		};
+		ED91FBE528E49B56001BF7DB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ED91FBE628E49B72001BF7DB /* Components */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		ED91FBE628E49B72001BF7DB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		EDD7975428E22E620073756F /* MultiPicker */ = {
@@ -565,6 +594,9 @@
 			dependencies = (
 			);
 			name = Newz;
+			packageProductDependencies = (
+				ED91FBE828E4A578001BF7DB /* ViewInspector */,
+			);
 			productName = Newz;
 			productReference = EDE989CD28D0C18D00D6CDEF /* Newz.app */;
 			productType = "com.apple.product-type.application";
@@ -597,6 +629,9 @@
 				Base,
 			);
 			mainGroup = EDE989C428D0C18D00D6CDEF;
+			packageReferences = (
+				ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
 			productRefGroup = EDE989CE28D0C18D00D6CDEF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -688,6 +723,7 @@
 				ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */,
 				ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */,
 				ED29E7FC28DDEBC600F50035 /* Constants.swift in Sources */,
+				ED91FBE428E47627001BF7DB /* ErrorAlert.swift in Sources */,
 				ED29E7FE28DE1B5900F50035 /* Authentication.swift in Sources */,
 				ED29E7F928DD033200F50035 /* DIContainer.swift in Sources */,
 				ED29E7EA28DB977600F50035 /* ApiRepository.swift in Sources */,
@@ -969,6 +1005,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED91FBE828E4A578001BF7DB /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		ED53C94E28D2449700001A56 /* NewzModel.xcdatamodeld */ = {

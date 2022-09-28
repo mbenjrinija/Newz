@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Article
-struct Article: Codable, Equatable, Identifiable {
+struct Article: Codable, Identifiable {
   var id = UUID()
   let author, title, desc: String?
   let url: String?
@@ -28,5 +28,11 @@ struct Article: Codable, Equatable, Identifiable {
 extension Article: Comparable {
   static func < (lhs: Article, rhs: Article) -> Bool {
     return lhs.url! < rhs.url!
+  }
+}
+
+extension Article: Equatable {
+  static func == (lhs: Article, rhs: Article) -> Bool {
+    return lhs.url! == rhs.url!
   }
 }

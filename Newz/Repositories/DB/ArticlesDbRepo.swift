@@ -18,11 +18,13 @@ struct ArticlesDbRepoImpl: ArticlesDbRepository {
   let persistentStore: PersistentStore
 
   func save(articles: [Article]) -> AnyPublisher<[Article], Error> {
-    return persistentStore.save(articles)
+    return persistentStore.insert(articles)
   }
 
   func fetchArticles() -> AnyPublisher<[Article], Error> {
-    return persistentStore.fetch(Article.self) { Article.fetchRequest }
+    return persistentStore
+      .fetch(Article.self) { Article.fetchRequest }
+      .mapped()
   }
 
 }

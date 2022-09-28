@@ -37,9 +37,11 @@ struct FeedListEditor: View {
       Button(action: self.save ) {
         Text("Save")
       }.buttonStyle(RoundedButtonStyle())
+        .disabled($viewModel.feedsCriterias.isEmpty)
     }.toolbar {
       EditButton()
     }.navigationTitle("Edit Feeds List")
+      .alert(error: $viewModel.error)
   }
 
   func save() {
@@ -53,3 +55,4 @@ struct FeedsEditor_Previews: PreviewProvider {
     FeedListEditor(feedsCriterias: .constant(ArticleCriteria.stub))
   }
 }
+

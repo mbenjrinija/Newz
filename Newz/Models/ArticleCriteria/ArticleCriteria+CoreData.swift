@@ -11,7 +11,7 @@ import CoreData
 extension ArticleCriteria: Persistable {
 
   init(managedObject: ArticleCriteriaManagedObject) {
-    self.id = managedObject.id!
+    self.id = managedObject.id ?? UUID()
     self.name = managedObject.name
     self.minDate = managedObject.minDate
     self.sources = managedObject.sources

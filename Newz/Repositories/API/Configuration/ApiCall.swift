@@ -9,16 +9,21 @@ import Foundation
 import Combine
 
 protocol APICall {
+  var baseURL: String { get }
   var path: String { get }
   var method: String { get }
   var headers: [String: String]? { get }
   var params: [String: String]? { get }
   func body() throws -> Data?
   var auth: AuthStrategy { get }
+
 }
 
 extension APICall {
-  func request(baseURL: String) throws -> URLRequest {
+
+  var baseURL: String { Constants.API.baseUrl }
+
+  func request() throws -> URLRequest {
     guard var urlComponents = URLComponents(string: baseURL + path) else {
       throw APIError.invalidURL
     }

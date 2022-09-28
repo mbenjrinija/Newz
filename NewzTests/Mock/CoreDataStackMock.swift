@@ -16,36 +16,48 @@ class CoreDataStackMock: PersistentStore, Mock {
   }
   enum Action: Equatable {
     case fetch(String, ContextSnapshot)
-    case save(String, ContextSnapshot)
+    case insert(String, ContextSnapshot)
+    case update(String, ContextSnapshot)
   }
 
   var recorder = MockActionRecorder<Action>(expected: [])
 
-  func fetch<T: Persistable>(_ persistable: T.Type, request:
-                             @escaping () -> NSFetchRequest<T.ManagedObject>) -> AnyPublisher<[T], Error> {
+  func fetch<T>(_ persistable: T.Type, request:
+                @escaping () -> NSFetchRequest<T.ManagedObject>)
+      -> AnyPublisher<[T.ManagedObject], Error> where T : Newz.Persistable {
     do {
       let fetchRequest = request()
       let context = container.viewContext
       let managedObjects = try context.fetch(fetchRequest)
-      let results = managedObjects.map(T.init(managedObject:))
       record(action: .fetch("\(T.self)", .init(inserted: 0, updated: 0, deleted: 0)))
-      return Just(results).setFailureType(to: Error.self).eraseToAnyPublisher()
+      return Just(managedObjects).setFailureType(to: Error.self).eraseToAnyPublisher()
     } catch {
-      return Fail<[T], Error>(error: error).eraseToAnyPublisher()
+      return Fail<[T.ManagedObject], Error>(error: error).eraseToAnyPublisher()
     }
   }
 
-  func save<T: Persistable>(_ objects: [T]) -> AnyPublisher<[T], Error> {
+  func update<Result>(_ operation: @escaping DBOperation<Result>)
+        -> AnyPublisher<Result, Error> {
     do {
       let context = container.viewContext
       context.reset()
-      try objects.forEach { _ = try $0.insert(in: context) }
-      record(action: .save("\(T.self)", context.snapshot))
+      let result = try operation(context)
       try context.save()
       context.reset()
-      return Just(objects).setFailureType(to: Error.self).eraseToAnyPublisher()
+      return Just(result).setFailureType(to: Error.self).eraseToAnyPublisher()
     } catch {
-      return Fail<[T], Error>(error: error).eraseToAnyPublisher()
+      return Fail<Result, Error>(error: error).eraseToAnyPublisher()
+    }
+  }
+
+
+  func insert<T: Persistable>(_ objects: [T]) -> AnyPublisher<[T], Error> {
+    return update { context in
+      let result = try objects
+        .map { try $0.insert(in: context) }
+        .map(T.init(managedObject:))
+      self.record(action: .insert("\(T.self)", context.snapshot))
+      return result
     }
   }
 

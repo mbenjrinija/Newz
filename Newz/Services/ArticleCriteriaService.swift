@@ -21,7 +21,12 @@ struct ArticleCriteriaServiceImpl: ArticleCriteriaService {
   }
 
   func save(criterias: [ArticleCriteria]) -> AnyPublisher<[ArticleCriteria], Error> {
-    persistentStore.save(criterias: criterias)
+    persistentStore
+      .deleteAll()
+      .flatMap { _ in
+        persistentStore
+          .save(criterias: criterias)
+      }.eraseToAnyPublisher()
   }
 
 }

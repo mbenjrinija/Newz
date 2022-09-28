@@ -10,11 +10,13 @@ import CoreData
 import Combine
 
 protocol PersistentStore {
-
+  typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
   func fetch<T: Persistable>(_ persistable: T.Type, request:
-                             @escaping () -> NSFetchRequest<T.ManagedObject>) -> AnyPublisher<[T], Error>
-  func save<T: Persistable>(_ object: [T]) -> AnyPublisher<[T], Error>
-
+                             @escaping () -> NSFetchRequest<T.ManagedObject>)
+                                -> AnyPublisher<[T.ManagedObject], Error>
+  func insert<T: Persistable>(_ object: [T]) -> AnyPublisher<[T], Error>
+  func update<Result>(_ operation: @escaping DBOperation<Result>)
+                                -> AnyPublisher<Result, Error>
 }
 
 protocol Persistable: Equatable where ManagedObject: NSManagedObject {
@@ -80,16 +82,15 @@ class CoreDataStack {
 
 extension CoreDataStack: PersistentStore {
 
-  func fetch<T: Persistable>(_ persistable: T.Type,
-                             request: @escaping () -> NSFetchRequest<T.ManagedObject>)
-                              -> AnyPublisher<[T], Error> {
-    let future = Future<[T], Error> { [weak container] promise in
+  func fetch<T: Persistable>(_ persistable: T.Type, request:
+                                           @escaping () -> NSFetchRequest<T.ManagedObject>)
+  -> AnyPublisher<[T.ManagedObject], Error> {
+    let future = Future<[T.ManagedObject], Error> { [weak container] promise in
       guard let context = container?.viewContext else { return }
       context.performAndWait {
         do {
           let fetched = try context.fetch(request())
-          let results = fetched.map(T.init(managedObject:))
-          promise(.success(results))
+          promise(.success(fetched))
         } catch {
           promise(.failure(error))
         }
@@ -100,26 +101,35 @@ extension CoreDataStack: PersistentStore {
       .eraseToAnyPublisher()
   }
 
-  func save<T: Persistable>(_ objects: [T]) -> AnyPublisher<[T], Error> {
-    let future = Future<[T], Error> { [weak container, weak backgroundQueue] promise in
-      backgroundQueue?.async {
-        guard let context = container?.newBackgroundContext() else { return }
-        context.configureAsUpdateContext()
-        context.performAndWait {
-          do {
-            _ = try objects.map { try $0.insert(in: context) }
-            if context.hasChanges { try context.save() }
-            context.reset()
-            promise(.success(objects))
-          } catch {
-            promise(.failure(error))
-          }
+
+func update<Result>(_ operation: @escaping DBOperation<Result>)
+    -> AnyPublisher<Result, Error> {
+  let future = Future<Result, Error> { [weak container, weak backgroundQueue] promise in
+    backgroundQueue?.async {
+      guard let context = container?.newBackgroundContext() else { return }
+      context.configureAsUpdateContext()
+      context.performAndWait {
+        do {
+          let result = try operation(context)
+          if context.hasChanges { try context.save() }
+          context.reset()
+          promise(.success(result))
+        } catch {
+          promise(.failure(error))
         }
       }
     }
-    return onStoreReady
-      .flatMap { future }
-      .eraseToAnyPublisher()
+  }
+  return onStoreReady
+    .flatMap { future }
+    .eraseToAnyPublisher()
+  }
+
+  func insert<T: Persistable>(_ objects: [T]) -> AnyPublisher<[T], Error> {
+    self.update { context in
+      let result = try objects.map { try $0.insert(in: context) }
+      return result.map(T.init(managedObject:))
+    }
   }
 
 }
@@ -143,4 +153,12 @@ extension NSManagedObjectContext {
 
 enum PersistenceError: Error {
   case failedInsert
+}
+
+extension Publisher {
+  func mapped<T: Persistable>()
+  -> AnyPublisher<[T], Failure> where Output == [T.ManagedObject] {
+      return map { $0.map(T.init(managedObject:)) }
+        .eraseToAnyPublisher()
+  }
 }

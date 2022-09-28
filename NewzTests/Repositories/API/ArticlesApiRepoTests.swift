@@ -11,7 +11,6 @@ import Combine
 
 final class ArticlesApiRepoTests: XCTestCase {
 
-  let fakeBaseUrl = "https://fake.url"
   var sut: ArticlesApiRepoImpl!
   var subs = Set<AnyCancellable>()
 
@@ -28,18 +27,19 @@ final class ArticlesApiRepoTests: XCTestCase {
     // Given
     let expectation = expectation(description: "Fetching articles")
     let expected = Article.stub
+    let criteria = ArticleCriteria()
     var results: [Article]?
-    let call = ArticlesApiRepoImpl.Call.getArticles
+    let call = ArticlesApiRepoImpl.Call.getArticles(criteria)
 
     let mockResponse = MockResponse(
-      url: try XCTUnwrap(try? call.request(baseURL: Constants.API.baseUrl).url?.absoluteString),
+      url: try XCTUnwrap(try? call.request().url?.absoluteString),
       result: .success(try StubDummy.loadData(for: .articles)))
     MockUrlProtocol.register(mock: mockResponse)
     // When
-    sut.fetchArticles()
+    sut.fetchArticles(criteria: criteria)
       .sinkToResult { result in
         result.assertSuccess()
-        results = try? result.get()
+        results = (try? result.get())?.data
         expectation.fulfill()
       }.store(in: &subs)
     wait(for: [expectation], timeout: 4)

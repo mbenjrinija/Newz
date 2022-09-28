@@ -27,7 +27,7 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.success
     let expected = TestApiRepository.Model()
-    let url = Constants.API.baseUrl + call.path
+    let url = try XCTUnwrap(call.request().url?.absoluteString)
     let response = MockResponse.init(url: url, result:
         .success(try JSONEncoder().encode(expected)))
     MockUrlProtocol.register(mock: response)
@@ -51,11 +51,6 @@ final class ApiRepositoryTests: XCTestCase {
   func test_wrongUrl_failure() throws {
     // Given
     let call = TestApiRepository.Call.urlError
-    let expected = TestApiRepository.Model()
-    let url = Constants.API.baseUrl + call.path
-    let response = MockResponse.init(url: url, result:
-        .success(try JSONEncoder().encode(expected)))
-    MockUrlProtocol.register(mock: response)
     var results: Result<TestApiRepository.Model, Error>?
     let expectation = expectation(description: #function)
 
@@ -75,11 +70,6 @@ final class ApiRepositoryTests: XCTestCase {
   func test_bodyError_failure() throws {
     // Given
     let call = TestApiRepository.Call.bodyError
-    let expected = TestApiRepository.Model()
-    let url = Constants.API.baseUrl + call.path
-    let response = MockResponse.init(url: url, result:
-        .success(try JSONEncoder().encode(expected)))
-    MockUrlProtocol.register(mock: response)
     var results: Result<TestApiRepository.Model, Error>?
     let expectation = expectation(description: #function)
 
@@ -100,11 +90,11 @@ final class ApiRepositoryTests: XCTestCase {
     // Given
     let call = TestApiRepository.Call.noHttpCodeError
     let expected = TestApiRepository.Model()
-    let url = Constants.API.baseUrl + call.path
     let urlResponse = URLResponse(url: URL(fileURLWithPath: ""),
                                   mimeType: "example",
                                   expectedContentLength: 0,
                                   textEncodingName: nil)
+    let url = try XCTUnwrap(call.request().url?.absoluteString)
     let response = MockResponse.init(url: url, result:
         .success(try JSONEncoder().encode(expected)), response: urlResponse)
     MockUrlProtocol.register(mock: response)
@@ -143,8 +133,14 @@ class TestApiRepository: ApiRepository {
     case bodyError
     case noHttpCodeError
 
+    var auth: AuthStrategy { MediaStackAuth() }
+
+    var baseURL: String {
+      return "https://test.com"
+    }
+
     var path: String {
-      if self == .urlError { return "くそ" } // kuso
+      if self == .urlError { return ":-80/negative-port" } // kuso
       return "/test/path"
     }
     var method: String { "POST" }
