@@ -19,9 +19,25 @@ protocol PersistentStore {
 
 protocol Persistable: Equatable where ManagedObject: NSManagedObject {
   associatedtype ManagedObject
+  var id: UUID { get }
   init(managedObject: ManagedObject)
-  func managedObject(context: NSManagedObjectContext) -> ManagedObject
+  func populate(object: ManagedObject) -> ManagedObject
   static var fetchRequest: NSFetchRequest<ManagedObject> { get }
+}
+
+extension Persistable {
+  func insert(in context: NSManagedObjectContext) throws -> Self.ManagedObject {
+    let inserted = try NSEntityDescription
+      .insertNewObject(forEntityName: Self.entityName,
+                       into: context) as? Self.ManagedObject ?? {
+        throw PersistenceError.failedInsert
+      }()
+    return populate(object: inserted)
+  }
+
+  static var entityName: String {
+    String(describing: Self.self)
+  }
 }
 
 class CoreDataStack {
@@ -64,7 +80,8 @@ class CoreDataStack {
 
 extension CoreDataStack: PersistentStore {
 
-  func fetch<T: Persistable>(_ persistable: T.Type, request: @escaping () -> NSFetchRequest<T.ManagedObject> )
+  func fetch<T: Persistable>(_ persistable: T.Type,
+                             request: @escaping () -> NSFetchRequest<T.ManagedObject>)
                               -> AnyPublisher<[T], Error> {
     let future = Future<[T], Error> { [weak container] promise in
       guard let context = container?.viewContext else { return }
@@ -90,7 +107,7 @@ extension CoreDataStack: PersistentStore {
         context.configureAsUpdateContext()
         context.performAndWait {
           do {
-            _ = objects.map { $0.managedObject(context: context) }
+            _ = try objects.map { try $0.insert(in: context) }
             if context.hasChanges { try context.save() }
             context.reset()
             promise(.success(objects))
@@ -122,4 +139,8 @@ extension NSManagedObjectContext {
     mergePolicy = NSOverwriteMergePolicy
     undoManager = nil
   }
+}
+
+enum PersistenceError: Error {
+  case failedInsert
 }

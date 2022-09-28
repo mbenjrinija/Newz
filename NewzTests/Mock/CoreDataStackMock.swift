@@ -39,7 +39,7 @@ class CoreDataStackMock: PersistentStore, Mock {
     do {
       let context = container.viewContext
       context.reset()
-      objects.forEach { _ = $0.managedObject(context: context) }
+      try objects.forEach { _ = try $0.insert(in: context) }
       record(action: .save("\(T.self)", context.snapshot))
       try context.save()
       context.reset()
@@ -50,7 +50,7 @@ class CoreDataStackMock: PersistentStore, Mock {
   }
 
   func preload<T: Persistable>(_ objects: [T]) throws {
-    objects.forEach { _ = $0.managedObject(context: container.viewContext) }
+    try objects.forEach { _ = try $0.insert(in: container.viewContext) }
     if container.viewContext.hasChanges {
       try container.viewContext.save()
     }

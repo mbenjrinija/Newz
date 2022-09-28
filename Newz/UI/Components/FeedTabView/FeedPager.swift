@@ -9,37 +9,53 @@ import SwiftUI
 import Combine
 
 struct FeedPager: View {
+  @State var viewModel: ViewModel
+  @Binding var feedsCriterias: [ArticleCriteria]
   @Binding var selected: Int
-  @StateObject var viewModel: ViewModel
 
-  init(feedCriterias: [Article.Criteria], selected: Binding<Int>) {
+  init(feedsCriterias: Binding<[ArticleCriteria]>,
+       selected: Binding<Int>) {
+    self._feedsCriterias = feedsCriterias
     self._selected = selected
-    self._viewModel = StateObject(wrappedValue:
-                                    ViewModel(feedCriterias: feedCriterias))
+    let viewModel = ViewModel(feedsCriterias: feedsCriterias.wrappedValue)
+    self._viewModel = State(initialValue: viewModel)
   }
 
   var body: some View {
     TabView(selection: $selected) {
-      ForEach(Array(viewModel.feeds.enumerated()),
-              id: \.offset) { index, feed in
-        FeedView(viewModel: feed).tag(index)
+      ForEach(viewModel.feeds) { feed in
+        FeedView(viewModel: feed).tag(feed.tag)
       }
-    }.tabViewStyle(.page(indexDisplayMode: .never))
+    }
+    .tabViewStyle(.page(indexDisplayMode: .never))
+    .onChange(of: feedsCriterias, perform: { newCriterias in
+      viewModel.update(feedsCriterias: newCriterias)
+    })
   }
 }
 
 extension FeedPager {
-  class ViewModel: ObservableObject {
-    @Published var feeds: [FeedViewModel]
+  struct ViewModel {
+    var feeds: [FeedViewModel]
 
-    init(feedCriterias: [Article.Criteria]) {
-      self.feeds = feedCriterias.map { FeedViewModel(criteria: $0) }
+    init(feedsCriterias: [ArticleCriteria]) {
+      self.feeds = Self.models(from: feedsCriterias)
+    }
+
+    mutating func update(feedsCriterias: [ArticleCriteria]) {
+      self.feeds = Self.models(from: feedsCriterias)
+    }
+
+    static func models(from feedsCriterias: [ArticleCriteria])
+        -> [FeedViewModel] {
+      feedsCriterias.enumerated()
+        .map { FeedViewModel(criteria: $1, tag: $0) }
     }
   }
 }
 
 struct FeedPager_Previews: PreviewProvider {
     static var previews: some View {
-      FeedPager(feedCriterias: Article.Criteria.stub, selected: .constant(1))
+      FeedPager(feedsCriterias: .constant(ArticleCriteria.stub), selected: .constant(1))
     }
 }

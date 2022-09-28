@@ -29,6 +29,7 @@ extension Injectable {
 
 extension Injectable.Repository.Db {
   static var articles: Injectable<ArticlesDbRepository> { .init() }
+  static var criterias: Injectable<ArticleCriteriaDbRepository> { .init() }
 }
 
 extension Injectable.Repository.Api {
@@ -41,4 +42,5 @@ extension Injectable.Provider {
 
 extension Injectable.Service {
   static var articles: Injectable<ArticlesService> { .init() }
+  static var criterias: Injectable<ArticleCriteriaService> { .init() }
 }

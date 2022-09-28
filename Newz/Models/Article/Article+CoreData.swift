@@ -11,6 +11,7 @@ import CoreData
 extension Article: Persistable {
 
   init(managedObject: ArticleManagedObject) {
+    self.id = managedObject.id!
     self.author = managedObject.author
     self.title = managedObject.title
     self.desc = managedObject.desc
@@ -23,20 +24,22 @@ extension Article: Persistable {
     self.publishedAt = managedObject.publishedAt
   }
 
-  func managedObject(context: NSManagedObjectContext) -> ArticleManagedObject {
-    let article = ArticleManagedObject(context: context)
-    article.author = self.author
-    article.title = self.title
-    article.desc = self.desc
-    article.url = self.url
-    article.source = self.source
-    article.image = self.image
-    article.category = self.category
-    article.language = self.language
-    article.country = self.country
-    article.publishedAt = self.publishedAt
-    return article
+  func populate(object: ArticleManagedObject) -> ArticleManagedObject {
+    object.id = self.id
+    object.author = self.author
+    object.title = self.title
+    object.desc = self.desc
+    object.url = self.url
+    object.source = self.source
+    object.image = self.image
+    object.category = self.category
+    object.language = self.language
+    object.country = self.country
+    object.publishedAt = self.publishedAt
+    return object
   }
 
-  static var fetchRequest: NSFetchRequest<ArticleManagedObject> { ArticleManagedObject.fetchRequest() }
+  static var fetchRequest: NSFetchRequest<ArticleManagedObject> {
+    ArticleManagedObject.fetchRequest()
+  }
 }

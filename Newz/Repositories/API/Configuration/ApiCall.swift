@@ -35,7 +35,7 @@ extension APICall {
 }
 
 enum APIError: Error {
-  case httpCode(Int)
+  case httpCode(Int, String)
   case invalidURL
   case invalidQueryParams
   case unexpectedResponse

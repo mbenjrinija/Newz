@@ -54,22 +54,22 @@ extension Article: Stub {
 extension FeedViewModel: Stub {
   static var stub: [FeedViewModel] {
     [
-//      FeedViewModel(name: "Headlines", criteria: Article.Criteria(),
+//      FeedViewModel(name: "Headlines", criteria: ArticleCriteria(),
 //           articles: .loaded(Array(Article.stub.prefix(10))), tag: 1),
-//      FeedViewModel(name: "Tech", criteria: Article.Criteria(),
+//      FeedViewModel(name: "Tech", criteria: ArticleCriteria(),
 //           articles: .loaded(Array(Article.stub.reversed().prefix(10))), tag: 2),
-//      FeedViewModel(name: "Finance", criteria: Article.Criteria(),
+//      FeedViewModel(name: "Finance", criteria: ArticleCriteria(),
 //           articles: .loaded(Array(Article.stub.dropFirst(5).prefix(10))), tag: 3)
     ]
   }
 }
 
-extension Article.Criteria: Stub {
-  static var stub: [Article.Criteria] {[
-    Article.Criteria(name: "Tech"),
-    Article.Criteria(name: "Highlights"),
-    Article.Criteria(name: "Finance"),
-    Article.Criteria(name: "Apple"),
-    Article.Criteria(name: "Google")
+extension ArticleCriteria: Stub {
+  static var stub: [ArticleCriteria] {[
+    ArticleCriteria(name: "Tech"),
+    ArticleCriteria(name: "Highlights"),
+    ArticleCriteria(name: "Finance"),
+    ArticleCriteria(name: "Apple"),
+    ArticleCriteria(name: "Google")
   ]}
 }

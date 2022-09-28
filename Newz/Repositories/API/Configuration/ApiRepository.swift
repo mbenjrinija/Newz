@@ -34,7 +34,8 @@ extension Publisher where Output == URLSession.DataTaskPublisher.Output {
       }
       // throw if status code is out of success range
       guard successCodes.contains(code) else {
-        throw APIError.httpCode(code)
+        let json = String(data: data, encoding: .utf8)
+        throw APIError.httpCode(code, json ?? "No data in body")
       }
       // return data object
       return data

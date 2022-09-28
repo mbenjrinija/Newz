@@ -14,14 +14,10 @@ struct FeedView: View {
   var body: some View {
     LoadableView(loadable: viewModel.articles) { articles in
       List(articles) { article in
-        VStack(alignment: .leading) {
-          Text(article.title ?? "--")
-            .font(.title2)
-          Text(article.desc ?? "--")
-            .font(.caption)
-            .foregroundColor(.gray)
-        }
+        ArticleItem(article: article)
       }
+      .listRowSeparator(.hidden)
+      .listStyle(.plain)
     }.onAppear(perform: viewModel.configure)
   }
 }

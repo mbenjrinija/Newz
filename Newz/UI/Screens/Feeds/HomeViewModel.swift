@@ -11,15 +11,29 @@ import Combine
 extension HomeView {
   class ViewModel: ObservableObject {
 
-    @Published var feedCriterias: [Article.Criteria] = Article.Criteria.stub
+    @Inject(.Service.criterias) var criteriasService
+    @Published var feedsCriterias: [ArticleCriteria] = []
     @Published var selectedFeed = 0
 
-    var subs = Set<AnyCancellable>()
+    var subs = CancelBag()
 
     var titles: [String] {
-      feedCriterias.map(\.name)
+      feedsCriterias.map(\.name).map { $0 ?? "Untitled" }
     }
 
+    var feeds: [FeedViewModel] {
+      feedsCriterias.enumerated()
+        .map { FeedViewModel(criteria: $1, tag: $0) }
+    }
+
+    func configure() {
+      criteriasService.loadCriterias()
+        .receive(on: DispatchQueue.main)
+        .replaceError(with: []) // TODO: handle error
+        .sink(receiveValue: { [weak self] value in
+          self?.feedsCriterias = value
+        }).store(in: &subs)
+    }
   }
 
 }

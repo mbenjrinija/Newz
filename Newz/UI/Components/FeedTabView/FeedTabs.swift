@@ -20,7 +20,7 @@ struct FeedTabs: View {
             ForEach(Array(titles.enumerated()),
                     id: \.element) { index, title in
               tabItem(title: title,
-                      tag: index, selected: $selected)
+                      tag: index)
                       .id(index)
             }
           }.animation(.spring(response: 0.3, dampingFraction: 0.6),
@@ -34,10 +34,9 @@ struct FeedTabs: View {
       }
   }
 
-  func tabItem(title: String, tag: Int,
-               selected: Binding<Int>) -> some View {
-    let highlighted = selected.wrappedValue == tag
-    return Button(action: { selected.wrappedValue = tag}, label: {
+  func tabItem(title: String, tag: Int) -> some View {
+    let highlighted = selected == tag
+    return Button(action: { selected = tag}, label: {
       VStack(spacing: 8) {
         Text(title)
           .font(.title3)

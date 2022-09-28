@@ -11,12 +11,14 @@ final class FeedViewModel: ObservableObject, Identifiable {
 
   @Inject(.Service.articles) var articlesService: ArticlesService
 
-  @Published var criteria: Article.Criteria
+  var criteria: ArticleCriteria
+  var tag: Int
   @Published var articles: Loadable<[Article]>
 
-  init(criteria: Article.Criteria,
+  init(criteria: ArticleCriteria, tag: Int,
        articles: Loadable<[Article]> = .notLoaded) {
     self.criteria = criteria
+    self.tag = tag
     self.articles = articles
   }
 

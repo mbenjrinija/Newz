@@ -39,17 +39,33 @@ extension DIContainer {
 
   static func configure() throws {
     let urlSession: URLSession = .default
+    // configure Providers
     Self.default
       .register(.Provider.persistentStore) { _ in
         CoreDataStack()
-      }.register(.Repository.Db.articles) { resolver in
-        ArticlesDbRepoImpl(persistentStore: try resolver.resolve(.Provider.persistentStore))
+      }
+    // configure Repositories
+    Self.default
+       .register(.Repository.Db.articles) { resolver in
+        ArticlesDbRepoImpl(persistentStore:
+                            try resolver.resolve(.Provider.persistentStore))
       }.register(.Repository.Api.articles) { _ in
         ArticlesApiRepoImpl(session: urlSession)
-      }.register(.Service.articles) { resolver in
-        ArticlesServiceImpl(persistentStore: try resolver.resolve(.Repository.Db.articles),
-                            apiRepository: try resolver.resolve(.Repository.Api.articles))
+      }.register(.Repository.Db.criterias) { resolver in
+        ArticleCriteriaDbRepoImpl(persistentStore:
+          try resolver.resolve(.Provider.persistentStore))
       }
+    // configure Services
+    Self.default
+      .register(.Service.articles) { resolver in
+        ArticlesServiceImpl(persistentStore:
+                              try resolver.resolve(.Repository.Db.articles),
+                            apiRepository:
+                              try resolver.resolve(.Repository.Api.articles))
+    }.register(.Service.criterias) { resolver in
+      ArticleCriteriaServiceImpl(persistentStore:
+                                  try resolver.resolve(.Repository.Db.criterias))
+    }
   }
 
 }

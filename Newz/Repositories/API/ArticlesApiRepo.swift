@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ArticlesApiRepository: ApiRepository {
-  func fetchArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error>
+  func fetchArticles(criteria: ArticleCriteria) -> AnyPublisher<ArrayResult<Article>, Error>
 }
 
 struct ArticlesApiRepoImpl: ArticlesApiRepository {
@@ -20,7 +20,7 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
     self.session = session
   }
 
-  func fetchArticles(criteria: Article.Criteria) -> AnyPublisher<ArrayResult<Article>, Error> {
+  func fetchArticles(criteria: ArticleCriteria) -> AnyPublisher<ArrayResult<Article>, Error> {
       call(endpoint: Call.getArticles(criteria)).eraseToAnyPublisher()
   }
 
@@ -28,7 +28,7 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
 
 extension ArticlesApiRepoImpl {
   enum Call {
-    case getArticles(Article.Criteria)
+    case getArticles(ArticleCriteria)
   }
 }
 

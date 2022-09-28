@@ -14,17 +14,26 @@ struct HomeView: View {
   var body: some View {
     NavigationView {
       VStack {
-        if viewModel.feedCriterias.isEmpty {
+        if viewModel.titles.isEmpty {
           emptyView
         } else {
           FeedTabs(titles: viewModel.titles,
                    selected: $viewModel.selectedFeed)
-          FeedPager(feedCriterias: viewModel.feedCriterias,
+          FeedPager(feedsCriterias: $viewModel.feedsCriterias,
                     selected: $viewModel.selectedFeed)
+          .ignoresSafeArea(.all)
         }
       }
       .navigationTitle("My Feeds")
       .navigationBarTitleDisplayMode(.large)
+      .toolbar {
+        ToolbarItem {
+          NavigationLink(destination: FeedListEditor(
+            feedsCriterias: $viewModel.feedsCriterias)) {
+            Image(systemName: "square.and.pencil")
+          }
+        }
+      }.onAppear(perform: viewModel.configure)
     }
   }
 
