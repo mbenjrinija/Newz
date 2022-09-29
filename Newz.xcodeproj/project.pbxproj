@@ -46,7 +46,8 @@
 		ED5F036428D53722003FC51F /* ApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5F036328D53722003FC51F /* ApiCall.swift */; };
 		ED82FE2728DF805800AFC4DC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */; };
 		ED91FBE428E47627001BF7DB /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91FBE328E47627001BF7DB /* ErrorAlert.swift */; };
-		ED91FBE928E4A578001BF7DB /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = ED91FBE828E4A578001BF7DB /* ViewInspector */; };
+		ED91FBEC28E4A77C001BF7DB /* TagViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91FBEB28E4A77C001BF7DB /* TagViewTest.swift */; };
+		ED91FBEF28E4ACB9001BF7DB /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = ED91FBEE28E4ACB9001BF7DB /* ViewInspector */; };
 		EDD7975628E22E780073756F /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975528E22E780073756F /* MultiPicker.swift */; };
 		EDD7975828E24C720073756F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975728E24C720073756F /* ButtonStyle.swift */; };
 		EDD7975B28E30F690073756F /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975A28E30F690073756F /* TagView.swift */; };
@@ -116,6 +117,7 @@
 		ED5F036328D53722003FC51F /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCall.swift; sourceTree = "<group>"; };
 		ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		ED91FBE328E47627001BF7DB /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		ED91FBEB28E4A77C001BF7DB /* TagViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewTest.swift; sourceTree = "<group>"; };
 		EDD7975528E22E780073756F /* MultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPicker.swift; sourceTree = "<group>"; };
 		EDD7975728E24C720073756F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		EDD7975A28E30F690073756F /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED91FBEF28E4ACB9001BF7DB /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +148,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED91FBE928E4A578001BF7DB /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,8 +456,17 @@
 		ED91FBE628E49B72001BF7DB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				ED91FBEA28E4A764001BF7DB /* TagView */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		ED91FBEA28E4A764001BF7DB /* TagView */ = {
+			isa = PBXGroup;
+			children = (
+				ED91FBEB28E4A77C001BF7DB /* TagViewTest.swift */,
+			);
+			path = TagView;
 			sourceTree = "<group>";
 		};
 		EDD7975428E22E620073756F /* MultiPicker */ = {
@@ -576,6 +587,9 @@
 				ED53C96128D25E6E00001A56 /* PBXTargetDependency */,
 			);
 			name = NewzTests;
+			packageProductDependencies = (
+				ED91FBEE28E4ACB9001BF7DB /* ViewInspector */,
+			);
 			productName = NewzTests;
 			productReference = ED53C95C28D25E6E00001A56 /* NewzTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -595,7 +609,6 @@
 			);
 			name = Newz;
 			packageProductDependencies = (
-				ED91FBE828E4A578001BF7DB /* ViewInspector */,
 			);
 			productName = Newz;
 			productReference = EDE989CD28D0C18D00D6CDEF /* Newz.app */;
@@ -630,7 +643,7 @@
 			);
 			mainGroup = EDE989C428D0C18D00D6CDEF;
 			packageReferences = (
-				ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */,
+				ED91FBED28E4ACB9001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = EDE989CE28D0C18D00D6CDEF /* Products */;
 			projectDirPath = "";
@@ -700,6 +713,7 @@
 				ED29E7E828DB904800F50035 /* StubTest.swift in Sources */,
 				ED29E81028DF354100F50035 /* MockAPI.swift in Sources */,
 				ED5EF2B828D8FFDA00BB91CE /* ArticlesApiRepoTests.swift in Sources */,
+				ED91FBEC28E4A77C001BF7DB /* TagViewTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,7 +1021,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+		ED91FBED28E4ACB9001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector";
 			requirement = {
@@ -1018,9 +1032,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ED91FBE828E4A578001BF7DB /* ViewInspector */ = {
+		ED91FBEE28E4ACB9001BF7DB /* ViewInspector */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED91FBE728E4A578001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			package = ED91FBED28E4ACB9001BF7DB /* XCRemoteSwiftPackageReference "ViewInspector" */;
 			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */

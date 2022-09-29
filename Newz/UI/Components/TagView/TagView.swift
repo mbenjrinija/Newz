@@ -13,6 +13,7 @@ struct TagView: View {
   @Binding var tags: [String]
   @State var newTag: String = ""
   @State var alreadyExistError = false
+  internal var didAppear: ((Self) -> Void)?
 
   var body: some View {
     VStack {
@@ -25,23 +26,9 @@ struct TagView: View {
           .buttonStyle(BorderlessButtonStyle())
       }
       FlowLayout(items: tags) { tag in
-        Button(action: { delete(tag) }, label: {
-          HStack {
-            Text(tag)
-            Image(systemName: "xmark.circle")
-              .foregroundColor(.gray)
-          }
-          .padding(.leading, 18)
-          .padding(.trailing, 10)
-          .padding(.vertical, 4)
-          .background(
-            RoundedRectangle(cornerRadius: 20)
-              .foregroundColor(.gray.opacity(0.3))
-          ).padding(2)
-        }).foregroundColor(.primary)
-          .buttonStyle(BorderlessButtonStyle())
+        TagCell(text: tag, action: { delete(tag) })
       }.padding(.bottom, 8)
-    }
+    }.onAppear { self.didAppear?(self) }
   }
 
   func delete(_ item: String) {
@@ -58,11 +45,31 @@ struct TagView: View {
 
   func add() {
     if !alreadyExistError {
-      DispatchQueue.main.async {
-        tags.append(newTag)
-        newTag = ""
-      }
+      tags.append(newTag)
+      newTag = ""
     }
+  }
+}
+
+struct TagCell: View {
+  var text: String
+  var action: () -> Void
+  var body: some View {
+    Button(action: self.action, label: {
+      HStack {
+        Text(text)
+        Image(systemName: "xmark.circle")
+          .foregroundColor(.gray)
+      }
+      .padding(.leading, 18)
+      .padding(.trailing, 10)
+      .padding(.vertical, 4)
+      .background(
+        RoundedRectangle(cornerRadius: 20)
+          .foregroundColor(.gray.opacity(0.3))
+      ).padding(2)
+    }).foregroundColor(.primary)
+      .buttonStyle(BorderlessButtonStyle())
   }
 }
 
