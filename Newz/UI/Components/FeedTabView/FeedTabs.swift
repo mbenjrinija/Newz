@@ -8,35 +8,38 @@
 import SwiftUI
 
 struct FeedTabs: View {
-
   let titles: [String]
-  @Binding var selected: Int
+  @Binding var selected: String?
   @Namespace var namespace
 
   var body: some View {
-      ScrollView(.horizontal, showsIndicators: false) {
-        ScrollViewReader { proxy in
+      ScrollViewReader { scrollProxy in
+        ScrollView(.horizontal, showsIndicators: false) {
           HStack {
-            ForEach(Array(titles.enumerated()),
-                    id: \.element) { index, title in
-              tabItem(title: title,
-                      tag: index)
-                      .id(index)
+            ForEach(titles, id: \.self) { title in
+              TabItem(title: title,
+                      selected: $selected,
+                      namespace: namespace).id(title)
             }
-          }.animation(.spring(response: 0.3, dampingFraction: 0.6),
-                      value: selected)
-           .onChange(of: selected, perform: { index in
-             withAnimation {
-               proxy.scrollTo(index)
-             }
-           })
+          }
         }
+        .onChange(of: selected, perform: { index in
+          withAnimation {
+            scrollProxy.scrollTo(index) // LEAK HERE
+          }
+        })
       }
   }
+}
 
-  func tabItem(title: String, tag: Int) -> some View {
-    let highlighted = selected == tag
-    return Button(action: { selected = tag}, label: {
+struct TabItem: View {
+  var title: String
+  @Binding var selected: String?
+  var namespace: Namespace.ID
+
+  var body: some View {
+    let highlighted = selected == title
+    return Button(action: { selected = title}, label: {
       VStack(spacing: 8) {
         Text(title)
           .font(.title3)
@@ -47,7 +50,8 @@ struct FeedTabs: View {
             .matchedGeometryEffect(id: "tab_underline", in: namespace)
         }
       }.padding(.horizontal)
-    })
+    }).animation(.spring(response: 0.3, dampingFraction: 0.6),
+                 value: selected)
   }
 }
 
@@ -57,10 +61,11 @@ struct FeedTabs_Previews: PreviewProvider {
   }
 
   struct ParentView: View {
-    @State var selected = 1
+    static let titles = ["Headlines", "Apple", "Microsoft",
+                  "Technology", "Block Chain", "Other"]
+    @State var selected = titles.first
     var body: some View {
-      FeedTabs(titles: ["Headlines", "Apple", "Microsoft",
-                        "Technology", "Block Chain", "Other"],
+      FeedTabs(titles: Self.titles,
                selected: $selected)
     }
   }

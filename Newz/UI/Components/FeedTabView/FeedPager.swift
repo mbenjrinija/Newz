@@ -11,10 +11,10 @@ import Combine
 struct FeedPager: View {
   @State var viewModel: ViewModel
   @Binding var feedsCriterias: [ArticleCriteria]
-  @Binding var selected: Int
+  @Binding var selected: String?
 
   init(feedsCriterias: Binding<[ArticleCriteria]>,
-       selected: Binding<Int>) {
+       selected: Binding<String?>) {
     self._feedsCriterias = feedsCriterias
     self._selected = selected
     let viewModel = ViewModel(feedsCriterias: feedsCriterias.wrappedValue)
@@ -24,7 +24,7 @@ struct FeedPager: View {
   var body: some View {
     TabView(selection: $selected) {
       ForEach(viewModel.feeds) { feed in
-        FeedView(viewModel: feed).tag(feed.tag)
+        FeedView(viewModel: feed).tag(feed.criteria.name)
       }
     }
     .tabViewStyle(.page(indexDisplayMode: .never))
@@ -56,6 +56,6 @@ extension FeedPager {
 
 struct FeedPager_Previews: PreviewProvider {
     static var previews: some View {
-      FeedPager(feedsCriterias: .constant(ArticleCriteria.stub), selected: .constant(1))
+      FeedPager(feedsCriterias: .constant(ArticleCriteria.stub), selected: .constant(ArticleCriteria.stub.first?.name))
     }
 }

@@ -13,7 +13,7 @@ extension HomeView {
 
     @Inject(.Service.criterias) var criteriasService
     @Published var feedsCriterias: [ArticleCriteria] = []
-    @Published var selectedFeed = 0
+    @Published var selectedFeed: String?
 
     var subs = CancelBag()
 
@@ -32,6 +32,7 @@ extension HomeView {
         .replaceError(with: []) // TODO: handle error
         .sink(receiveValue: { [weak self] value in
           self?.feedsCriterias = value
+          self?.selectedFeed = value.first?.name
         }).store(in: &subs)
     }
   }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ArticleItem: View {
   var article: Article
-  @State var image: UIImage = UIImage()
   let cornerRadius: CGFloat = 25
+
   var body: some View {
     VStack(alignment: .leading) {
       Spacer()

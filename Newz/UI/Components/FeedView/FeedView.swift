@@ -13,7 +13,7 @@ struct FeedView: View {
 
   var body: some View {
     LoadableView(loadable: viewModel.articles) { articles in
-      List(articles) { article in
+      List(articles, id: \.id) { article in
         ArticleItem(article: article)
       }
       .listRowSeparator(.hidden)
