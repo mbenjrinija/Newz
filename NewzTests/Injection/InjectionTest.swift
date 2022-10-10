@@ -10,7 +10,7 @@ import XCTest
 
 final class Injection: XCTestCase {
 
-  @Inject(.Repository.Db.articles) var sut: ArticlesDbRepository
+  @Inject(.Repository.Local.articles) var sut: ArticlesDbRepository
 
   override func setUpWithError() throws {
     DIContainer.default.reset()
@@ -25,8 +25,8 @@ final class Injection: XCTestCase {
 
   func test_injection_success() throws {
     // Given
-    DIContainer.default.register(.Repository.Db.articles) { injector in
-      ArticlesDbRepoImpl(persistentStore:
+    DIContainer.default.register(.Repository.Local.articles) { injector in
+      ArticlesDbRepoMain(persistentStore:
                           try injector.resolve(.Provider.persistentStore))
     }
     // When: using the injected value
@@ -39,7 +39,7 @@ final class Injection: XCTestCase {
     DIContainer.default.reset()
     // When: Calling the injected value
     // Then
-    XCTAssertThrowsError(try DIContainer.default.resolve(.Repository.Db.articles))
+    XCTAssertThrowsError(try DIContainer.default.resolve(.Repository.Local.articles))
   }
 
 }

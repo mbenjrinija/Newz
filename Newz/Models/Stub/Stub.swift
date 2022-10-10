@@ -47,7 +47,8 @@ enum StubError: Error {
 // MARK: - Stubs
 extension Article: Stub {
   static var stub: [Article] {
-    (try? Self.loadJson(of: ArrayResult<Article>.self, for: .articles).data) ?? []
+    (try? Self.loadJson(of: ArrayResult<Article>.self,
+                        for: .articles).data) ?? []
   }
 }
 

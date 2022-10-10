@@ -24,7 +24,7 @@ class CoreDataStackMock: PersistentStore, Mock {
 
   func fetch<T>(_ persistable: T.Type, request:
                 @escaping () -> NSFetchRequest<T.ManagedObject>)
-      -> AnyPublisher<[T.ManagedObject], Error> where T : Newz.Persistable {
+      -> AnyPublisher<[T.ManagedObject], Error> where T: Newz.Persistable {
     do {
       let fetchRequest = request()
       let context = container.viewContext
@@ -49,7 +49,6 @@ class CoreDataStackMock: PersistentStore, Mock {
       return Fail<Result, Error>(error: error).eraseToAnyPublisher()
     }
   }
-
 
   func insert<T: Persistable>(_ objects: [T]) -> AnyPublisher<[T], Error> {
     return update { context in

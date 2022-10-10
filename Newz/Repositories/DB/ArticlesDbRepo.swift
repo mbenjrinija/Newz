@@ -13,7 +13,7 @@ protocol ArticlesDbRepository {
   func fetchArticles() -> AnyPublisher<[Article], Error>
 }
 
-struct ArticlesDbRepoImpl: ArticlesDbRepository {
+struct ArticlesDbRepoMain: ArticlesDbRepository {
 
   let persistentStore: PersistentStore
 

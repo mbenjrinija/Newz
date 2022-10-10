@@ -15,25 +15,25 @@ struct Injectable<T> {
 
 // allow nesting/shortNames for convenience reasons
 // swiftlint:disable nesting
-// swiftlint:disable type_name
 extension Injectable {
   struct Service {}
   struct Provider {}
   struct Repository {
-    struct Db { }
-    struct Api { }
+    struct Local { }
+    struct Remote { }
   }
 }
 // swiftlint:enable nesting
-// swiftlint:enable type_name
 
-extension Injectable.Repository.Db {
+extension Injectable.Repository.Local {
   static var articles: Injectable<ArticlesDbRepository> { .init() }
   static var criterias: Injectable<ArticleCriteriaDbRepository> { .init() }
+  static var images: Injectable<any ImageCacheStore> { .init() }
 }
 
-extension Injectable.Repository.Api {
+extension Injectable.Repository.Remote {
   static var articles: Injectable<ArticlesApiRepository> { .init() }
+  static var images: Injectable<ImageLoader> { .init() }
 }
 
 extension Injectable.Provider {
@@ -43,4 +43,5 @@ extension Injectable.Provider {
 extension Injectable.Service {
   static var articles: Injectable<ArticlesService> { .init() }
   static var criterias: Injectable<ArticleCriteriaService> { .init() }
+  static var images: Injectable<ImageService> { .init() }
 }

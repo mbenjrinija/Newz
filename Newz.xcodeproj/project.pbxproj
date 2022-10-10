@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED21ADE428F2158400A0A097 /* CacheStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADE328F2158400A0A097 /* CacheStore.swift */; };
+		ED21ADE628F22CA800A0A097 /* ImageCacheStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADE528F22CA800A0A097 /* ImageCacheStore.swift */; };
+		ED21ADE828F22CF700A0A097 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADE728F22CF700A0A097 /* ImageService.swift */; };
+		ED21ADEA28F2306600A0A097 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADE928F2306600A0A097 /* ImageLoader.swift */; };
+		ED21ADED28F2E04A00A0A097 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADEC28F2E04A00A0A097 /* RemoteImage.swift */; };
+		ED21ADEF28F3170C00A0A097 /* RemoteImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADEE28F3170C00A0A097 /* RemoteImageViewModel.swift */; };
+		ED21ADF128F431EF00A0A097 /* Publisher+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADF028F431EF00A0A097 /* Publisher+Extension.swift */; };
+		ED21ADF428F4647900A0A097 /* ArticleExpanded.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED21ADF328F4647900A0A097 /* ArticleExpanded.swift */; };
 		ED265A0028E0D18B0005D02B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2659FF28E0D18B0005D02B /* FeedView.swift */; };
 		ED265A0328E0D2760005D02B /* FeedPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED265A0228E0D2760005D02B /* FeedPager.swift */; };
 		ED265A0528E0D5300005D02B /* FeedTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED265A0428E0D5300005D02B /* FeedTabs.swift */; };
@@ -48,6 +56,8 @@
 		ED91FBE428E47627001BF7DB /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91FBE328E47627001BF7DB /* ErrorAlert.swift */; };
 		ED91FBEC28E4A77C001BF7DB /* TagViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED91FBEB28E4A77C001BF7DB /* TagViewTest.swift */; };
 		ED91FBEF28E4ACB9001BF7DB /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = ED91FBEE28E4ACB9001BF7DB /* ViewInspector */; };
+		EDB1CD7C28F0D7590076C8B9 /* LoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB1CD7B28F0D7590076C8B9 /* LoadableView.swift */; };
+		EDB1CD7F28F1DB6F0076C8B9 /* OptionalGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB1CD7E28F1DB6F0076C8B9 /* OptionalGeometryEffect.swift */; };
 		EDD7975628E22E780073756F /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975528E22E780073756F /* MultiPicker.swift */; };
 		EDD7975828E24C720073756F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975728E24C720073756F /* ButtonStyle.swift */; };
 		EDD7975B28E30F690073756F /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7975A28E30F690073756F /* TagView.swift */; };
@@ -75,6 +85,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED21ADE328F2158400A0A097 /* CacheStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStore.swift; sourceTree = "<group>"; };
+		ED21ADE528F22CA800A0A097 /* ImageCacheStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheStore.swift; sourceTree = "<group>"; };
+		ED21ADE728F22CF700A0A097 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		ED21ADE928F2306600A0A097 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		ED21ADEC28F2E04A00A0A097 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		ED21ADEE28F3170C00A0A097 /* RemoteImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageViewModel.swift; sourceTree = "<group>"; };
+		ED21ADF028F431EF00A0A097 /* Publisher+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extension.swift"; sourceTree = "<group>"; };
+		ED21ADF328F4647900A0A097 /* ArticleExpanded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleExpanded.swift; sourceTree = "<group>"; };
 		ED2659FF28E0D18B0005D02B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		ED265A0228E0D2760005D02B /* FeedPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPager.swift; sourceTree = "<group>"; };
 		ED265A0428E0D5300005D02B /* FeedTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTabs.swift; sourceTree = "<group>"; };
@@ -118,6 +136,8 @@
 		ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		ED91FBE328E47627001BF7DB /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		ED91FBEB28E4A77C001BF7DB /* TagViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewTest.swift; sourceTree = "<group>"; };
+		EDB1CD7B28F0D7590076C8B9 /* LoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableView.swift; sourceTree = "<group>"; };
+		EDB1CD7E28F1DB6F0076C8B9 /* OptionalGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalGeometryEffect.swift; sourceTree = "<group>"; };
 		EDD7975528E22E780073756F /* MultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPicker.swift; sourceTree = "<group>"; };
 		EDD7975728E24C720073756F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		EDD7975A28E30F690073756F /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -154,6 +174,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED21ADE128F2156100A0A097 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				ED21ADE228F2156D00A0A097 /* Configuration */,
+				ED21ADE528F22CA800A0A097 /* ImageCacheStore.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		ED21ADE228F2156D00A0A097 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				ED21ADE328F2158400A0A097 /* CacheStore.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		ED21ADEB28F2E03100A0A097 /* RemoteImage */ = {
+			isa = PBXGroup;
+			children = (
+				ED21ADEC28F2E04A00A0A097 /* RemoteImage.swift */,
+				ED21ADEE28F3170C00A0A097 /* RemoteImageViewModel.swift */,
+			);
+			path = RemoteImage;
+			sourceTree = "<group>";
+		};
+		ED21ADF228F4646300A0A097 /* ArticleView */ = {
+			isa = PBXGroup;
+			children = (
+				EDD7976028E352BD0073756F /* ArticleItem.swift */,
+				ED21ADF328F4647900A0A097 /* ArticleExpanded.swift */,
+			);
+			path = ArticleView;
+			sourceTree = "<group>";
+		};
 		ED2659FC28E0D1540005D02B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +220,8 @@
 		ED2659FD28E0D15A0005D02B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				ED21ADEB28F2E03100A0A097 /* RemoteImage */,
+				EDB1CD7D28F1DB5E0076C8B9 /* Modifiers */,
 				ED91FBE228E4761A001BF7DB /* ErrorAlert */,
 				EDD7975C28E313630073756F /* FlowLayout */,
 				EDD7975928E30F550073756F /* TagView */,
@@ -172,6 +229,7 @@
 				ED265A0128E0D25C0005D02B /* FeedTabView */,
 				ED2659FE28E0D1680005D02B /* FeedView */,
 				EDD7975728E24C720073756F /* ButtonStyle.swift */,
+				EDB1CD7B28F0D7590076C8B9 /* LoadableView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -179,9 +237,9 @@
 		ED2659FE28E0D1680005D02B /* FeedView */ = {
 			isa = PBXGroup;
 			children = (
+				ED21ADF228F4646300A0A097 /* ArticleView */,
 				ED2659FF28E0D18B0005D02B /* FeedView.swift */,
 				ED82FE2628DF805800AFC4DC /* FeedViewModel.swift */,
-				EDD7976028E352BD0073756F /* ArticleItem.swift */,
 			);
 			path = FeedView;
 			sourceTree = "<group>";
@@ -243,6 +301,7 @@
 			children = (
 				ED29E7F628DCEEC200F50035 /* ArticlesService.swift */,
 				EDD7976C28E395780073756F /* ArticleCriteriaService.swift */,
+				ED21ADE728F22CF700A0A097 /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -261,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				ED29E80228DE2C1E00F50035 /* Date+Extension.swift */,
+				ED21ADF028F431EF00A0A097 /* Publisher+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -413,6 +473,7 @@
 			children = (
 				ED5F036228D536FD003FC51F /* Configuration */,
 				ED5F035628D3928D003FC51F /* ArticlesApiRepo.swift */,
+				ED21ADE928F2306600A0A097 /* ImageLoader.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -469,6 +530,14 @@
 			path = TagView;
 			sourceTree = "<group>";
 		};
+		EDB1CD7D28F1DB5E0076C8B9 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				EDB1CD7E28F1DB6F0076C8B9 /* OptionalGeometryEffect.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		EDD7975428E22E620073756F /* MultiPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +583,7 @@
 		EDDDB7DA28D36812009AFBD5 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				ED21ADE128F2156100A0A097 /* Cache */,
 				ED5F035528D39220003FC51F /* API */,
 				ED5F035428D39217003FC51F /* DB */,
 			);
@@ -721,6 +791,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED21ADEF28F3170C00A0A097 /* RemoteImageViewModel.swift in Sources */,
 				EDD7976B28E3923E0073756F /* ArticleCriteriaDbRepo.swift in Sources */,
 				ED29E80C28DF07C400F50035 /* HomeViewModel.swift in Sources */,
 				ED265A0328E0D2760005D02B /* FeedPager.swift in Sources */,
@@ -730,9 +801,11 @@
 				ED5F035728D3928D003FC51F /* ArticlesApiRepo.swift in Sources */,
 				EDD7976D28E395780073756F /* ArticleCriteriaService.swift in Sources */,
 				EDE989D328D0C18D00D6CDEF /* ContentView.swift in Sources */,
+				ED21ADF128F431EF00A0A097 /* Publisher+Extension.swift in Sources */,
 				EDE989D128D0C18D00D6CDEF /* NewzApp.swift in Sources */,
 				ED29E80028DE1CFD00F50035 /* ArrayResult.swift in Sources */,
 				ED53C95028D2449700001A56 /* NewzModel.xcdatamodeld in Sources */,
+				EDB1CD7C28F0D7590076C8B9 /* LoadableView.swift in Sources */,
 				EDD7976728E38A730073756F /* ArticleCriteria+CoreData.swift in Sources */,
 				ED53C95228D245DE00001A56 /* CoreDateStack.swift in Sources */,
 				ED5F035E28D4A1F5003FC51F /* Injector.swift in Sources */,
@@ -750,15 +823,22 @@
 				ED53C95528D248A200001A56 /* Article.swift in Sources */,
 				EDD7975E28E313720073756F /* FlowLayout.swift in Sources */,
 				ED53C95728D249FF00001A56 /* Article+CoreData.swift in Sources */,
+				ED21ADE628F22CA800A0A097 /* ImageCacheStore.swift in Sources */,
 				EDD7976528E383250073756F /* ArticleCriteria.swift in Sources */,
+				ED21ADEA28F2306600A0A097 /* ImageLoader.swift in Sources */,
 				EDD7975628E22E780073756F /* MultiPicker.swift in Sources */,
 				ED29E80E28DF1C4600F50035 /* Loadable.swift in Sources */,
+				ED21ADF428F4647900A0A097 /* ArticleExpanded.swift in Sources */,
 				ED4158EF28E1C8A800560980 /* FeedListEditor.swift in Sources */,
 				ED82FE2728DF805800AFC4DC /* FeedViewModel.swift in Sources */,
 				EDD7975828E24C720073756F /* ButtonStyle.swift in Sources */,
 				ED29E80328DE2C1E00F50035 /* Date+Extension.swift in Sources */,
+				EDB1CD7F28F1DB6F0076C8B9 /* OptionalGeometryEffect.swift in Sources */,
 				ED5F035A28D394DA003FC51F /* Injectable.swift in Sources */,
 				ED4158F228E1E9AD00560980 /* FeedListEditorViewModel.swift in Sources */,
+				ED21ADE828F22CF700A0A097 /* ImageService.swift in Sources */,
+				ED21ADED28F2E04A00A0A097 /* RemoteImage.swift in Sources */,
+				ED21ADE428F2158400A0A097 /* CacheStore.swift in Sources */,
 				EDD7975B28E30F690073756F /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,7 +942,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -916,7 +996,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -943,7 +1023,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -974,7 +1054,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

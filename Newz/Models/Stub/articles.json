@@ -7,6 +7,78 @@
   },
   "data":[
     {
+    "author": "Billy Steele",
+    "title": "Recommended Reading: What's next for DALL-E 2?",
+    "description": "Tech's new frontier raises a “buffet of unwanted questions”Charlie Warzel, Galaxy Brain/The AtlanticWarzel dives into questions about DALL-E 2 in his newsletter for The Atlantic, many of which have been voiced by others. Those include what it could mean for the future of art and the potential commercial ambitions of OpenAI, the company that created it.Computer lab weekPolygonEnjoy a bit of nostalgia this weekend with pieces like \"Type to Learn became a battle royale in our computer lab\" and \"Artists somehow keep making masterpieces with Kid Pix and MS Paint.\"&nbsp;‘Operating with...",
+    "url": "https://www.engadget.com/recommended-reading-the-rise-of-dall-e-2-140048918.html?src=rss",
+    "source": "Engadget",
+    "image": "https://s.yimg.com/os/creatr-uploaded-images/2022-07/0cde27c0-0f66-11ed-b9b2-ed043f5f1169",
+    "category": "technology",
+    "language": "en",
+    "country": "us",
+    "published_at": "2022-07-30T14:00:48+00:00"
+    },
+    {
+    "author": "Tim Biggs",
+    "title": "Workplace training with a celebrity twist",
+    "description": "Australian startup EdApp is introducing lessons delivered by cave diver John Volanthen and Queer Eye’s Karamo Brown.",
+    "url": "https://www.smh.com.au/technology/workplace-training-with-a-celebrity-twist-20220801-p5b65r.html?ref=rss&utm_medium=rss&utm_source=rss_technology",
+    "source": "The Sydney Morning Herald",
+    "image": "https://static.ffx.io/images/$zoom_0.26956199778357776%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_124%2C$y_0/t_crop_custom/q_86%2Cf_auto/16ec31973012b67bc548268e2f64ec0b9c67a72d",
+    "category": "technology",
+    "language": "en",
+    "country": "au",
+    "published_at": "2022-08-01T19:32:00+00:00"
+    },
+    {
+    "author": "Igor Bonifacic",
+    "title": "Discord’s overhauled Android app will shorten the wait for new features",
+    "description": "Discord has begun rolling out an overhauled Android app that addresses one of the most consistent complaints with the software. If you follow the company, you’ve probably seen it often announce new features only to note they will launch on iOS and desktop first before arriving on Google’s operating system. We saw that recently with the release of Server Profiles. According to Discord, that’s about to become a thing of the past.In a blog post published on Monday, the company said it recently rebuilt its Android app using React Native. Discord has employed the framework for iOS development...",
+    "url": "https://www.engadget.com/discord-overhauled-android-app-announced-200055646.html?src=rss",
+    "source": "Engadget",
+    "image": "https://s.yimg.com/os/creatr-uploaded-images/2022-08/f4df97f0-11cf-11ed-bbbc-8eb85c26a102",
+    "category": "technology",
+    "language": "en",
+    "country": "us",
+    "published_at": "2022-08-01T20:00:55+00:00"
+    },
+    {
+    "author": "Mariella Moon",
+    "title": "Facebook faces suspension in Kenya over ethnic-based hate speech",
+    "description": "Kenya's National Cohesion and Integration Commission (NCIC), a government agency that aims to eradicate ethnic or racial discrimination among the country's 45 tribes, has given Facebook seven days to tackle hate speech related to next month's election on its platform. If the social media fails to do so, it faces suspension in the country. The agency's warning comes shortly after international NGO Global Witness and legal non-profit Foxglove released a report detailing how Facebook approved ads written to instigate ethnic violence in both English and Swahili.The organizations joined forces to...",
+    "url": "https://www.engadget.com/facebook-faces-suspension-in-kenya-hate-speech-111647128.html?src=rss",
+    "source": "Engadget",
+    "image": "https://s.yimg.com/os/creatr-uploaded-images/2022-07/90450310-0fe6-11ed-bffe-0a412f9fe6be",
+    "category": "technology",
+    "language": "en",
+    "country": "us",
+    "published_at": "2022-07-30T11:16:47+00:00"
+    },
+    {
+    "author": "Engadget",
+    "title": "The best PC games for 2022",
+    "description": "So how do you categorize a beast like gaming on the PC? With decades of titles to pluck from (and the first port of call for most indie titles, too), there's so much to choose from. Gaming on your PC adds the benefits of (nearly always flawless) backward compatibility and console-beating graphical performance — if you've got the coin for it. The whole idea of what a PC is and where you can play it is shifting, too, with the rise of handheld “consolized” PCs like the Steam Deck. We've tried to be broad with our recommendations here on purpose – there are so many great games out there for...",
+    "url": "https://www.engadget.com/the-best-pc-games-150000910.html?src=rss",
+    "source": "Engadget",
+    "image": "https://s.yimg.com/os/creatr-uploaded-images/2020-04/51289830-799e-11ea-befb-4071c6f0df0a",
+    "category": "technology",
+    "language": "en",
+    "country": "us",
+    "published_at": "2022-08-02T13:16:04+00:00"
+    },
+    {
+    "author": "Kris Holt",
+    "title": "TikTok is testing more mini-games, including one from Aim Lab",
+    "description": "TikTok is conducting a broader test of games in its all-conquering app. The company recently added a way for creators in some markets (including the US) to append one of nine mini-games to a video by tapping the Add Link button and choosing the MiniGame option. When viewers come across a video that links to a game, they can start playing it by tapping a link next to the creator's username.“Currently, we’re exploring bringing HTML5 games to TikTok through integrations with third-party game developers and studios,\" a TikTok spokesperson told TechCrunch. One of the games is from Aim Lab, the...",
+    "url": "https://www.engadget.com/tiktok-html5-mini-games-test-aim-lab-201912600.html?src=rss",
+    "source": "Engadget",
+    "image": "https://s.yimg.com/os/creatr-uploaded-images/2022-06/a647d970-f971-11ec-bffd-7068de1476fb",
+    "category": "technology",
+    "language": "en",
+    "country": "us",
+    "published_at": "2022-07-29T20:19:12+00:00"
+    },
+    {
       "author":"MarketBeat News",
       "title":"OZ Minerals (OTCMKTS:OZMLF) Trading Down 1.7%",
       "description":"OZ Minerals Limited (OTCMKTS:OZMLF &#8211; Get Rating)&#8217;s stock price traded down 1.7% during mid-day trading on Tuesday . The company traded as low as $14.60 and last traded at $14.60. 292 shares were traded during mid-day trading, a decline of 83% from the average session volume of 1,731 shares. The stock had previously closed at [&#8230;]",
@@ -269,18 +341,6 @@
       "language":"en",
       "country":"us",
       "published_at":"2022-06-22T04:57:37+00:00"
-    },
-    {
-      "author":"Sara Whitman",
-      "title":"Kate Hudson Models Tiny White Bikini Before Slipping Into A Sexy LBD: Video",
-      "description":"Kate Hudson looked fit and flawless in her latest Instagram video, which showed her stepping in and out of a beautiful black dress.",
-      "url":"https://hollywoodlife.com/2022/06/22/kate-hudson-white-bikini-video/",
-      "source":"hollywoodlife",
-      "image":"https://hollywoodlife.com/wp-content/uploads/2022/06/kate-hudson-lingerie-ss-ftr1.jpg",
-      "category":"general",
-      "language":"en",
-      "country":"us",
-      "published_at":"2022-06-22T05:03:22+00:00"
     },
     {
       "author":"Associated Press",

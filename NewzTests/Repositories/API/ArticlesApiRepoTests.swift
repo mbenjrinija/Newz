@@ -11,11 +11,11 @@ import Combine
 
 final class ArticlesApiRepoTests: XCTestCase {
 
-  var sut: ArticlesApiRepoImpl!
+  var sut: ArticlesApiRepoMain!
   var subs = Set<AnyCancellable>()
 
   override func setUpWithError() throws {
-    sut = ArticlesApiRepoImpl(session: .mocked)
+    sut = ArticlesApiRepoMain(session: .mocked)
   }
 
   override func tearDownWithError() throws {
@@ -29,7 +29,7 @@ final class ArticlesApiRepoTests: XCTestCase {
     let expected = Article.stub
     let criteria = ArticleCriteria()
     var results: [Article]?
-    let call = ArticlesApiRepoImpl.Call.getArticles(criteria)
+    let call = ArticlesApiRepoMain.Call.getArticles(criteria)
 
     let mockResponse = MockResponse(
       url: try XCTUnwrap(try? call.request().url?.absoluteString),

@@ -34,10 +34,18 @@ enum Loadable<T> {
   }
 }
 
+extension Loadable: Equatable {
+  static func == (lhs: Loadable<T>, rhs: Loadable<T>) -> Bool {
+    String(describing: lhs) == String(describing: rhs)
+  }
+}
+
 extension Publisher {
   func assignTo(_ loadable: Binding<Loadable<Self.Output>>) {
     let latest = loadable.wrappedValue.value
-    let cancellable = self.sink { completion in
+    let cancellable = self
+      .receive(on: DispatchQueue.main)
+      .sink { completion in
       if case let .failure(error) = completion {
         loadable.wrappedValue = .failed(latest, error)
       }
@@ -54,9 +62,7 @@ extension ObservableObject {
     return .init(get: { [weak self] in
       self?[keyPath: loadable] ?? current
     }, set: { [weak self] value in
-      DispatchQueue.main.async {
-        self?[keyPath: loadable] = value
-      }
+      self?[keyPath: loadable] = value
     })
   }
 }

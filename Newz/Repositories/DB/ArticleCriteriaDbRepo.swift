@@ -14,7 +14,7 @@ protocol ArticleCriteriaDbRepository {
   func deleteAll() -> AnyPublisher<[ArticleCriteria], Error>
 }
 
-struct ArticleCriteriaDbRepoImpl: ArticleCriteriaDbRepository {
+struct ArticleCriteriaDbRepoMain: ArticleCriteriaDbRepository {
 
   let persistentStore: PersistentStore
 

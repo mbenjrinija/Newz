@@ -12,13 +12,9 @@ protocol ArticlesApiRepository: ApiRepository {
   func fetchArticles(criteria: ArticleCriteria) -> AnyPublisher<ArrayResult<Article>, Error>
 }
 
-struct ArticlesApiRepoImpl: ArticlesApiRepository {
+struct ArticlesApiRepoMain: ArticlesApiRepository {
 
   let session: URLSession
-
-  init(session: URLSession) {
-    self.session = session
-  }
 
   func fetchArticles(criteria: ArticleCriteria) -> AnyPublisher<ArrayResult<Article>, Error> {
       call(endpoint: Call.getArticles(criteria)).eraseToAnyPublisher()
@@ -26,13 +22,13 @@ struct ArticlesApiRepoImpl: ArticlesApiRepository {
 
 }
 
-extension ArticlesApiRepoImpl {
+extension ArticlesApiRepoMain {
   enum Call {
     case getArticles(ArticleCriteria)
   }
 }
 
-extension ArticlesApiRepoImpl.Call: APICall {
+extension ArticlesApiRepoMain.Call: APICall {
   var auth: AuthStrategy { MediaStackAuth() }
   var path: String {
     switch self {

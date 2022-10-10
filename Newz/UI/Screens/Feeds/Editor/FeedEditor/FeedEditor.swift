@@ -77,7 +77,6 @@ extension FeedEditor {
 
     func save(feedCriterias: Binding<ArticleCriteria>,
               presentationMode: Binding<PresentationMode>) {
-      // TODO: Check existence of name
       var newCriterias = ArticleCriteria()
       newCriterias.name = name
       newCriterias.sources = sources

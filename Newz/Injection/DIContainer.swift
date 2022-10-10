@@ -46,26 +46,41 @@ extension DIContainer {
       }
     // configure Repositories
     Self.default
-       .register(.Repository.Db.articles) { resolver in
-        ArticlesDbRepoImpl(persistentStore:
+       .register(.Repository.Local.articles) { resolver in
+        ArticlesDbRepoMain(persistentStore:
                             try resolver.resolve(.Provider.persistentStore))
-      }.register(.Repository.Api.articles) { _ in
-        ArticlesApiRepoImpl(session: urlSession)
-      }.register(.Repository.Db.criterias) { resolver in
-        ArticleCriteriaDbRepoImpl(persistentStore:
+      }.register(.Repository.Remote.articles) { _ in
+        ArticlesApiRepoMain(session: urlSession)
+      }.register(.Repository.Local.criterias) { resolver in
+        ArticleCriteriaDbRepoMain(persistentStore:
           try resolver.resolve(.Provider.persistentStore))
+      }.register(.Repository.Remote.images) { _ in
+        ImageLoaderMain(session: urlSession)
+      }.register(.Repository.Local.images) { _ in
+        ImageCacheStoreMain()
       }
     // configure Services
     Self.default
       .register(.Service.articles) { resolver in
-        ArticlesServiceImpl(persistentStore:
-                              try resolver.resolve(.Repository.Db.articles),
-                            apiRepository:
-                              try resolver.resolve(.Repository.Api.articles))
-    }.register(.Service.criterias) { resolver in
-      ArticleCriteriaServiceImpl(persistentStore:
-                                  try resolver.resolve(.Repository.Db.criterias))
-    }
+      #if DEBUG
+      ArticlesServiceOfflineStub(persistentStore:
+                                  try resolver.resolve(.Repository.Local.articles))
+      #else
+      ArticlesServiceMain(persistentStore:
+                            try resolver.resolve(.Repository.Local.articles),
+                          apiRepository:
+                            try resolver.resolve(.Repository.Remote.articles))
+      #endif
+      }.register(.Service.criterias) { resolver in
+        ArticleCriteriaServiceMain(persistentStore:
+                                    try resolver.resolve(.Repository.Local.criterias))
+      }.register(.Service.images) { resolver in
+        ImageServiceMain(loader:
+                          try resolver.resolve(.Repository.Remote.images),
+                         cache:
+                          try resolver.resolve(.Repository.Local.images)
+        )
+      }
   }
 
 }

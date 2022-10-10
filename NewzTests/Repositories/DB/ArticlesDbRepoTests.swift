@@ -17,7 +17,7 @@ final class TestArticlesDbRepo: XCTestCase {
 
   override func setUpWithError() throws {
     mockDataStack = CoreDataStackMock()
-    sut = ArticlesDbRepoImpl(persistentStore: mockDataStack)
+    sut = ArticlesDbRepoMain(persistentStore: mockDataStack)
   }
 
   override func tearDownWithError() throws {

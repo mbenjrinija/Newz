@@ -13,7 +13,7 @@ protocol ArticleCriteriaService {
   func save(criterias: [ArticleCriteria]) -> AnyPublisher<[ArticleCriteria], Error>
 }
 
-struct ArticleCriteriaServiceImpl: ArticleCriteriaService {
+struct ArticleCriteriaServiceMain: ArticleCriteriaService {
   let persistentStore: ArticleCriteriaDbRepository
 
   func loadCriterias() -> AnyPublisher<[ArticleCriteria], Error> {

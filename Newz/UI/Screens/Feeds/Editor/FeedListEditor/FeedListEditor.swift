@@ -55,4 +55,3 @@ struct FeedsEditor_Previews: PreviewProvider {
     FeedListEditor(feedsCriterias: .constant(ArticleCriteria.stub))
   }
 }
-

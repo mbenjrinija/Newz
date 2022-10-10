@@ -101,7 +101,6 @@ extension CoreDataStack: PersistentStore {
       .eraseToAnyPublisher()
   }
 
-
 func update<Result>(_ operation: @escaping DBOperation<Result>)
     -> AnyPublisher<Result, Error> {
   let future = Future<Result, Error> { [weak container, weak backgroundQueue] promise in
