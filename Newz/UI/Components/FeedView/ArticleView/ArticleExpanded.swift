@@ -39,7 +39,6 @@ struct ArticleExpanded: View {
     let scale = 1 - (distance / height)
     if scale > 0.8, scale <= 1 {
       DispatchQueue.main.async {
-        print(scale)
         if scale < 0.9 {
           withAnimation(.spring()) {
             self.selected = nil

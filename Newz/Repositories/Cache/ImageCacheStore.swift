@@ -37,10 +37,10 @@ class ImageCacheStoreMain: ImageCacheStore {
 
   func load(for key: URL) -> UIImage? {
     lock.lock(); defer { lock.unlock() }
-    if let image = decodedImageCache.object(forKey: key as AnyObject) as? UIImage {
+    if let image = from(cache: decodedImageCache, for: key) {
       return image
     }
-    if let image = rawImageCache.object(forKey: key as AnyObject) as? UIImage {
+    if let image = from(cache: rawImageCache, for: key) {
       let decoded = image.decodedImage()
       cache(image: decoded, in: decodedImageCache, for: key)
       return decoded
@@ -63,6 +63,10 @@ class ImageCacheStoreMain: ImageCacheStore {
     cache.setObject(image as AnyObject,
                     forKey: key as AnyObject,
                     cost: image.diskSize)
+  }
+
+  func from(cache: Cache, for key: URL) -> UIImage? {
+    cache.object(forKey: key as AnyObject) as? UIImage
   }
 }
 

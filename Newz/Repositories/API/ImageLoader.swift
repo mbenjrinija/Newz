@@ -22,7 +22,9 @@ struct ImageLoaderMain: ImageLoader {
       .dataTaskPublisher(for: url)
       .mapData()
       .tryMap {
-        try UIImage(data: $0) ?? { throw ImageLoaderError.invalidData}()
+        try UIImage(data: $0)?.thumbnail() ?? {
+          throw ImageLoaderError.invalidData
+        }()
       }
       .eraseToAnyPublisher()
   }
@@ -31,4 +33,17 @@ struct ImageLoaderMain: ImageLoader {
 
 enum ImageLoaderError: Error {
   case invalidData
+}
+
+extension UIImage {
+  func thumbnail() -> UIImage? {
+    guard let imageData = self.pngData() else { return nil }
+    let options = [
+        kCGImageSourceCreateThumbnailWithTransform: true,
+        kCGImageSourceCreateThumbnailFromImageAlways: true,
+        kCGImageSourceThumbnailMaxPixelSize: 1000] as CFDictionary
+    guard let source = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
+    guard let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else { return nil }
+    return UIImage(cgImage: imageReference)
+  }
 }
