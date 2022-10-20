@@ -16,6 +16,7 @@ struct FeedView: View {
     ZStack {
       LoadableView(loadable: viewModel.articles) { articles in
         ScrollView {
+          Spacer(minLength: 40)
           LazyVStack(spacing: 0) {
             ForEach(articles, id: \.url!) { article in
               ArticleItem(payload: .init(article: article), namespace: namespace)
