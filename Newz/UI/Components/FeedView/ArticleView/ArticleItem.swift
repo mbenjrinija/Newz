@@ -9,48 +9,52 @@ import SwiftUI
 
 struct ArticleItem: View {
   let payload: Payload
-  let cornerRadius: CGFloat = 25
   var namespace: Namespace.ID?
-  var effectPrefix: String { "ArticleItem\(article.id)" }
+  var showDetails: Bool
+  var effectId: String { "ArticleItem\(article.id)" }
   var article: Article { payload.article }
+  let headerMaxHeight: CGFloat = 400
 
-  init(payload: Payload, namespace: Namespace.ID? = nil) {
+  init(payload: Payload, showDetails: Bool = false,
+       namespace: Namespace.ID? = nil) {
     self.payload = payload
     self.namespace = namespace
+    self.showDetails = showDetails
   }
 
   var body: some View {
-    VStack(alignment: .leading) {
-      Spacer()
-      sourceView
-        .optionalGeometryEffect(id: "\(effectPrefix):source", in: namespace)
-      titleView
-        .optionalGeometryEffect(id: "\(effectPrefix):title", in: namespace)
-      subtitleView
-    }
-    .frame(maxWidth: .infinity)
-    .shadow(color: Color.black.opacity(0.6),
-            radius: 3, x: 0, y: 0)
+    VStack(spacing: 0) {
+      VStack(alignment: .leading) {
+        Spacer()
+        newsSourceView
+          .optionalGeometryEffect(id: "\(effectId):source",
+                                  isSource: !payload.expanded, in: namespace)
+        titleView
+          .optionalGeometryEffect(id: "\(effectId):title",
+                                  isSource: !payload.expanded, in: namespace)
+      }
+      .padding(24)
+      .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0, y: 0)
+      .background(gradientBackground)
+      .background(backgroundImage)
+      .frame(maxHeight: headerMaxHeight)
 
-    .padding()
-    .background(gradientBackground)
-    .background(
-      backgroundImage
-    )
-    .cornerRadius(cornerRadius)
-    .background(shadow)
-    .padding(.bottom)
-    .optionalGeometryEffect(id: "\(effectPrefix):container", in: namespace)
+      descriptionView
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .card()
+    .optionalGeometryEffect(id: "\(effectId):card",
+                            isSource: !payload.expanded, in: namespace)
   }
 
-  var sourceView: some View {
+  var newsSourceView: some View {
     HStack {
       Color.accentColor.frame(width: 3, height: 12).cornerRadius(5)
       Text(article.source ?? "--")
         .font(.caption2)
         .foregroundColor(.white.opacity(0.8))
-        .multilineTextAlignment(.leading)
-    }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }.animation(.linear(duration: 0.2), value: namespace)
   }
 
   var titleView: some View {
@@ -58,69 +62,47 @@ struct ArticleItem: View {
       .font(.title2)
       .fontWeight(.medium)
       .foregroundColor(.white)
-      .multilineTextAlignment(.leading)
+      .frame(maxWidth: .infinity, alignment: .topLeading)
+      .animation(.linear(duration: 0.2), value: namespace)
   }
 
   @ViewBuilder
-  var subtitleView: some View {
-    if payload.expanded {
-      Text(article.desc ?? "--")
-        .font(.caption)
-        .foregroundColor(.white.opacity(0.8))
-        .multilineTextAlignment(.leading)
-    } else {
-      EmptyView()
+  var descriptionView: some View {
+    if showDetails {
+      ScrollView {
+        Text(payload.article.desc ?? "--")
+          .font(.caption)
+          .foregroundColor(.white.opacity(0.8))
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(24)
+        Spacer()
+      }.background(BlurView(effect: .dark))
     }
   }
 
-  var shadow: some View {
-    Rectangle()
-      .fill(Color.white)
-      .cornerRadius(cornerRadius)
-      .shadow(color: Color.black.opacity(0.1),
-              radius: 5, x: 0, y: 2)
-      .shadow(color: Color.black.opacity(0.2),
-              radius: 20, x: 0, y: 10)
-      .optionalGeometryEffect(id: "\(effectPrefix):shadow", in: namespace)
-  }
-
   var gradientBackground: some View {
-    LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5)]),
+    LinearGradient(gradient: Gradient(colors: [.clear, .black]),
                    startPoint: .top, endPoint: .bottom)
   }
 
   @ViewBuilder
   var backgroundImage: some View {
-//    if #available(iOS 15.0, *) {
-//      AsyncImage(url: URL(string: article.image ?? "")) { image in
-//        image
-//          .resizable()
-//          .aspectRatio(contentMode: .fill)
-//          .frame(alignment: .center)
-//          .optionalGeometryEffect(id: "\(effectPrefix):background", in: namespace)
-//      } placeholder: {
-//        ZStack {
-//          Image("news-photo")
-//          Color.clear.background(.ultraThinMaterial)
-//        }
-//      }
-//    } else {
     RemoteImage(url: article.image, image: payload.image) { image in
-        image
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(alignment: .center)
-          .optionalGeometryEffect(id: "\(effectPrefix):background", in: namespace)
-      } placeholder: {
-        Image("news-photo")
-          .blur(radius: 10)
-      }
-//    }
+      image
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .frame(height: headerMaxHeight)
+        .fixedSize()
+    } placeholder: {
+      Image("news-photo")
+        .blur(radius: 10)
+    }
   }
 }
 
 extension ArticleItem {
-  struct Payload {
+  struct Payload: Equatable, Identifiable {
+    var id = UUID()
     var image: UIImage?
     let article: Article
     var expanded = false

@@ -10,40 +10,51 @@ import Combine
 
 struct FeedView: View {
   @ObservedObject var viewModel: FeedViewModel
+  @State var isShowingDetailView = false
   @Namespace var namespace
   var body: some View {
     ZStack {
       LoadableView(loadable: viewModel.articles) { articles in
-        List(articles, id: \.url!) { article in
-          ArticleItem(payload: .init(article: article),
-                      namespace: namespace)
-            .aspectRatio(0.9, contentMode: .fit)
-            .tag(article.url)
-            .onTapGesture { expand(article) }
+        ScrollView {
+          LazyVStack(spacing: 0) {
+            ForEach(articles, id: \.url!) { article in
+              ArticleItem(payload: .init(article: article), namespace: namespace)
+                .aspectRatio(0.9, contentMode: .fit)
+                .padding(24)
+                .tag(article.url)
+                .opacity(viewModel.selectedArticle?.article == article ? 0 : 1)
+                .onTapGesture { expand(article) }
+            }
+          }
         }
-        .listStyle(.plain)
-        ArticleExpanded(selected: $viewModel.selectedArticle,
-                        namespace: namespace)
       }
-    }.onAppear(perform: viewModel.configure)
+    }
+    .fullScreenCover(isPresented: $isShowingDetailView) {
+      ArticleDetail(selected: $viewModel.selectedArticle, namespace: namespace)
+    }
+    .onChange(of: viewModel.selectedArticle) { _ in
+      withoutAnimation {
+        isShowingDetailView = viewModel.selectedArticle != nil
+      }
+    }
+    .onAppear(perform: viewModel.configure)
   }
 
   func expand(_ article: Article) {
     Task {
       let config = await viewModel.transitionConfig(for: article)
-      withAnimation(.spring()) {
-        viewModel.expand(with: config)
-      }
+      viewModel.expand(with: config)
     }
   }
 
-  func collapse() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-      withAnimation {
-        viewModel.collapseArticle()
-      }
+}
+
+func withoutAnimation(action: @escaping () -> Void) {
+    var transaction = Transaction()
+    transaction.disablesAnimations = true
+    withTransaction(transaction) {
+        action()
     }
-  }
 }
 
 struct FeedView_Previews: PreviewProvider {

@@ -29,6 +29,7 @@ struct FeedTabs: View {
           }
         })
       }
+      .background(Color(.systemBackground))
   }
 }
 

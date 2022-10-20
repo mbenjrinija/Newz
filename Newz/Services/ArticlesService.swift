@@ -34,8 +34,7 @@ struct ArticlesServiceOfflineStub: ArticlesService {
   func loadLiveArticles(criteria: ArticleCriteria) -> AnyPublisher<[Article], Error> {
     Future<[Article], Error> { promise in
       DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-        //promise(.success(Article.stub.shuffled()))
-        promise(.success(Article.stub))
+        promise(.success(Article.stub/*.shuffled()*/))
       }
     }.eraseToAnyPublisher()
   }

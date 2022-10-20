@@ -10,22 +10,27 @@ import SwiftUI
 struct HomeView: View {
 
   @StateObject private var viewModel = ViewModel()
+  @State var showHomeToolBar = true
 
   var body: some View {
     NavigationView {
-      VStack {
+      ZStack(alignment: .top) {
         if viewModel.titles.isEmpty {
           emptyView
         } else {
-          FeedTabs(titles: viewModel.titles,
-                   selected: $viewModel.selectedFeed)
           FeedPager(feedsCriterias: $viewModel.feedsCriterias,
                     selected: $viewModel.selectedFeed)
-          .ignoresSafeArea(.all)
+          FeedTabs(titles: viewModel.titles,
+                   selected: $viewModel.selectedFeed)
+            .opacity(showHomeToolBar ? 1 : 0)
+            .transition(.opacity)
+            .animation(.linear(duration: 0.2))
         }
       }
+      .environment(\.showHomeToolBar, $showHomeToolBar)
       .navigationTitle("My Feeds")
-      .navigationBarTitleDisplayMode(.large)
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationBarHidden(!showHomeToolBar)
       .toolbar {
         ToolbarItem {
           NavigationLink(destination: FeedListEditor(
@@ -33,7 +38,8 @@ struct HomeView: View {
             Image(systemName: "square.and.pencil")
           }
         }
-      }.onAppear(perform: viewModel.configure)
+      }
+      .onAppear(perform: viewModel.configure)
     }
   }
 
@@ -45,6 +51,17 @@ struct HomeView: View {
       Text("No feed")
         .foregroundColor(.gray)
     }
+  }
+
+  struct HideBarEnvironmentKey: EnvironmentKey {
+    static let defaultValue: Binding<Bool> = .constant(true)
+  }
+}
+
+extension EnvironmentValues {
+  var showHomeToolBar: Binding<Bool> {
+    get { self[HomeView.HideBarEnvironmentKey.self] }
+    set { self[HomeView.HideBarEnvironmentKey.self] = newValue }
   }
 }
 

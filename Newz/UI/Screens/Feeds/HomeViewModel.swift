@@ -14,6 +14,7 @@ extension HomeView {
     @Inject(.Service.criterias) var criteriasService
     @Published var feedsCriterias: [ArticleCriteria] = []
     @Published var selectedFeed: String?
+    @Published var selectedArticle: ArticleItem.Payload?
 
     var subs = CancelBag()
 
@@ -29,7 +30,7 @@ extension HomeView {
     func configure() {
       criteriasService.loadCriterias()
         .receive(on: DispatchQueue.main)
-        .replaceError(with: []) // TODO: handle error
+        .replaceError(with: [])
         .sink(receiveValue: { [weak self] value in
           self?.feedsCriterias = value
           self?.selectedFeed = value.first?.name
